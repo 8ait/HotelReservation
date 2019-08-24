@@ -4,23 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HotelReservation.Common.Interfaces;
 
 namespace HotelReservation.Controllers
 {
     public class HomeController : Controller
     {
-        HotelContext db = new HotelContext();
-
-        public ViewResult Index()
+        IRepository _repository;
+        
+        public HomeController(IRepository repository)
         {
-
-            return View(db.Clients);
+            _repository = repository;
         }
 
-        protected override void Dispose(bool disposing)
+        public ActionResult Index()
         {
-            db.Dispose();
-            base.Dispose(disposing);
+
+            return View();
+        }
+
+        public ActionResult GetPage(int id)
+        {
+            string path = "";
         }
     }
 }

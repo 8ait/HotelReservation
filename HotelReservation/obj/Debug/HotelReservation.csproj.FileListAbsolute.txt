@@ -45,11 +45,7 @@ C:\GitProjects\hotel\HotelReservation\bin\ru\System.Web.WebPages.Razor.resources
 C:\GitProjects\hotel\HotelReservation\obj\Debug\HotelReservation.dll
 C:\GitProjects\hotel\HotelReservation\obj\Debug\HotelReservation.pdb
 C:\GitProjects\hotel\HotelReservation\bin\System.Runtime.CompilerServices.Unsafe.dll
-C:\GitProjects\hotel\HotelReservation\bin\Unity.Abstractions.dll
-C:\GitProjects\hotel\HotelReservation\bin\Unity.Container.dll
 C:\GitProjects\hotel\HotelReservation\bin\System.Runtime.CompilerServices.Unsafe.xml
-C:\GitProjects\hotel\HotelReservation\bin\Unity.Abstractions.pdb
-C:\GitProjects\hotel\HotelReservation\bin\Unity.Container.pdb
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.dll
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Common.dll
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Common.WebHost.dll
@@ -58,3 +54,4 @@ C:\GitProjects\hotel\HotelReservation\bin\Ninject.xml
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Common.xml
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Common.WebHost.xml
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Mvc.xml
+C:\GitProjects\hotel\HotelReservation\obj\Debug\HotelReservation.csprojResolveAssemblyReference.cache

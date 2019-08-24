@@ -1,43 +1,41 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title – приложение ASP.NET</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
     @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-                </ul>
-            </div>
+    <div class="container">
+        <div class="text-center font-weight-bold">
+            <h2>Royal Palace Inn</h2>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
-        </footer>
-    </div>
+        <nav class="navbar navbar-default">
+            <div class="btn-group btn-block btn-lg">             
+                <input type="button" class="btn btn-dark navbar-btn">Главная</button>
+                <button type="button" class="btn btn-dark navbar-btn">Клиенты</button>
+                <button type="button" class="btn btn-dark navbar-btn">Бронь</button>
+                <button type="button" class="btn btn-dark navbar-btn">Скидки</button>
+                <button type="button" class="btn btn-dark navbar-btn">Номера</button>
+                <button type="button" class="btn btn-dark navbar-btn">Сервисы</button>
+            </div>
+        </nav>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @RenderBody()
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+
+        <footer class="footer">
+            <div class="text-center font-weight-bold">
+            &copy; 2019 Леонов и Никифоров.
+            </div>
+        </footer>
+
+    </div>
 </body>
 </html>
