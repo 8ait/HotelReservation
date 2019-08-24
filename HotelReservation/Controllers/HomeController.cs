@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelReservation.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,18 @@ namespace HotelReservation.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        HotelContext db = new HotelContext();
+
+        public ViewResult Index()
         {
-            return View();
+
+            return View(db.Clients);
         }
 
-        public ActionResult About()
+        protected override void Dispose(bool disposing)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
