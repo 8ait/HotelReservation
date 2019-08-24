@@ -158,7 +158,12 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Day.cs" />
     <Compile Include="Models\HotelContext.cs" />
+    <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\RS.cs" />
+    <Compile Include="Models\Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
