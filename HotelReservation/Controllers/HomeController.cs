@@ -22,10 +22,5 @@ namespace HotelReservation.Controllers
 
             return View();
         }
-
-        public ActionResult GetPage(int id)
-        {
-            string path = "";
-        }
     }
 }
