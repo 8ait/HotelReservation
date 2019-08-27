@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace HotelReservation.Common.Interfaces
 {
-    public interface IData
+    public interface IRedirector
     {
-
+        string GetPage(int id);
     }
 }

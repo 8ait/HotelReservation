@@ -5,6 +5,7 @@ using System.Web;
 using Ninject.Modules;
 using HotelReservation.Common.Interfaces;
 using HotelReservation.Common.Logic;
+using HotelReservation.Controllers;
 
 namespace HotelReservation.NinjectKernel
 {
@@ -14,6 +15,7 @@ namespace HotelReservation.NinjectKernel
         {
             Bind<IRepository>().To<HotelRepository>().WithConstructorArgument("context", new HotelContext());
             Bind<IData>().To<Data>();
+            Bind<IRedirector>().To<Redirector>();
         }
     }
 }

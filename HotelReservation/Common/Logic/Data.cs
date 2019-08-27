@@ -8,14 +8,11 @@ namespace HotelReservation.Common.Logic
 {
     public class Data : IData
     {
-        private Dictionary<string, string> _typesOfPages = new Dictionary<string, string>()
-        {
-            {"Main", "Views/Home/Index.cshtml"}
-        };
+        IRepository _repository;
 
-        public Dictionary<string, string> GetTypesOfPages()
+        public Data (IRepository repository)
         {
-            return _typesOfPages;
+            _repository = repository;
         }
     }
 }

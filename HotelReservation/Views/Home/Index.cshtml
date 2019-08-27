@@ -3,38 +3,118 @@
 }
 
 <body>
+    <style>
+        P {
+            text-indent: 1.5em;
+            text-align: justify;
+            padding: 10px; 
+        }
 
+        ul {
+        padding: 0; 
+        margin-left: 0px; 
+        }
+    </style> 
+    <br />
     <div class="container">     
-        <div class="jumbotron">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
             <div class="text-center">
-                <h1>Документация по проекту</h1>
+                <h5>Документация</h5>
             </div>
-            
-        </div>
-
-        <div class="row marketing">
-            <div class="col-lg-6">
-                <h4>Subheading</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                <h4>Subheading</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-                <h4>Subheading</h4>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-            </div>
-
-            <div class="col-lg-6">
-                <h4>Subheading</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                <h4>Subheading</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-                <h4>Subheading</h4>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            <div class="row">
+                <p>Веб-приложение для управления услугами гостиницы. На каждой странице
+                содержится своя маленькая документация. На главной странице представленна статистика,
+                описывающая состояние гостиницы.</p>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="jumbotron">
+                    <h5 class="text-center"><strong>Клиенты</strong></h5>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            &#9757; Проживает:
+                            <span class="badge badge-success badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center">
+                            &#9757; За последний месяц:
+                            <span class="badge badge-primary badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            &#9757; Всего:
+                            <span class="badge badge-info badge-pill">2</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="jumbotron">
+                    <h5 class="text-center"><strong>Сервисы</strong></h5>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            &#9757; Количество услуг:
+                            <span class="badge badge-info badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center">
+                            &#9757; За последний месяц:
+                            <span class="badge badge-success badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            &#9757; Всего закзано:
+                            <span class="badge badge-primary badge-pill">2</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="jumbotron">
+                    <h5 class="text-center"><strong>Номера</strong></h5>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            &#9757; Свободные:
+                            <span class="badge badge-success badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center">
+                            &#9757; Занятые:
+                            <span class="badge badge-danger badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            &#9757; На уборке:
+                            <span class="badge badge-warning badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-center">
+                            &#9757; Всего:
+                            <span class="badge badge-info badge-pill">2</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="jumbotron">
+                    <h5 class="text-center"><strong>Бронь</strong></h5>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            &#9757; Активные:
+                            <span class="badge badge-success badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-ligth d-flex justify-content-between align-items-center">
+                            &#9757; Завершенные:
+                            <span class="badge badge-warning badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-secondary d-flex justify-content-between align-items-center">
+                            &#9757; Отмененные:
+                            <span class="badge badge-danger badge-pill">2</span>
+                        </li>
+                        <li class="list-group-item list-group-item-ligth d-flex justify-content-between align-items-center">
+                            &#9757; Всего:
+                            <span class="badge badge-info badge-pill">2</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
 </body>
-</html>

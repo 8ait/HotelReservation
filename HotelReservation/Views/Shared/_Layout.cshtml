@@ -15,16 +15,27 @@
             <h2>Royal Palace Inn</h2>
         </div>
         <nav class="navbar navbar-default">
-            <div class="btn-group btn-block btn-lg">
-                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Главная</button>
-                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Клиенты</button>
-                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Бронь</button>
-                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Номера</button>
-                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Сервисы</button>
-                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Скидки</button>                           
+            <div class="btn-group btn-block btn-group-lg">
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=0'">Главная &#9875;</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=1'">Клиенты &#128513;</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=2'">Бронь &#9997;</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=3'">Номера &#127750;</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=4'">Сервисы &#9749;</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=5'">Скидки &#128293;</button>                           
             </div>            
         </nav>
-
+        <script>
+            $("button[data-form-method='post']").click(function (event) {
+                event.preventDefault();
+                var element = $(this);
+                var action = element.attr("href");
+                element.closest("form").each(function () {
+                    var form = $(this);
+                    form.attr("action", action);
+                    form.submit();
+                });
+            });
+        </script>
 
         @RenderBody()
         @Scripts.Render("~/bundles/jquery")
@@ -33,7 +44,7 @@
 
         <footer class="footer">
             <div class="text-center font-weight-bold">
-            &copy; 2019 Леонов и Никифоров.
+            &copy; 2019 Леонов и Никифоров &#127866;.
             </div>
         </footer>
 

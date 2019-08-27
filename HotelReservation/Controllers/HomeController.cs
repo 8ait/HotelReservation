@@ -5,17 +5,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HotelReservation.Common.Interfaces;
-using HotelReservation.Common.Helpers;
 
 namespace HotelReservation.Controllers
 {
     public class HomeController : Controller
     {
-        IRepository _repository;
+        IData _data;
+        IRedirector _redirector;
         
-        public HomeController(IRepository repository)
+        public HomeController(IRepository repository, IData data, IRedirector redirector)
         {
-            _repository = repository;
+            _data = data;
+            _redirector = redirector;
         }
 
         public ActionResult Index()
@@ -23,10 +24,10 @@ namespace HotelReservation.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Index(int id)
+        [HttpGet]
+        public ActionResult GetPage(int id)
         {
-            return View(HelperLayout.Main());
+            return RedirectToAction("Index", _redirector.GetPage(id));
         }
     }
 }
