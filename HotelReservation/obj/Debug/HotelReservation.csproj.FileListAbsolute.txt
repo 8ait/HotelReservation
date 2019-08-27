@@ -54,4 +54,3 @@ C:\GitProjects\hotel\HotelReservation\bin\Ninject.xml
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Common.xml
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Common.WebHost.xml
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Mvc.xml
-C:\GitProjects\hotel\HotelReservation\obj\Debug\HotelReservation.csprojResolveAssemblyReference.cache
