@@ -10,5 +10,7 @@ namespace HotelReservation.Common.Logic
     public class HotelContext : DbContext
     {
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Day> Days { get; set; }
+        public DbSet<Duration> Durations { get; set; }
     }
 }

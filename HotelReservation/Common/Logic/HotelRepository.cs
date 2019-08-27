@@ -21,9 +21,19 @@ namespace HotelReservation.Common.Logic
             db.SaveChanges();
         }
 
-        public IEnumerable<Client> List()
+        public IEnumerable<Client> GetClients()
         {
             return db.Clients;
+        }
+
+        public IEnumerable<Day> GetDays()
+        {
+            return db.Days;
+        }
+
+        public IEnumerable<Duration> GetPeriods()
+        {
+            return db.Durations;
         }
 
         public Client Get(int id)

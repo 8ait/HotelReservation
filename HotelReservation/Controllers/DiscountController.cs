@@ -3,45 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HotelReservation.Models;
+using HotelReservation.Common.Interfaces;
 
 namespace HotelReservation.Controllers
 {
     public class DiscountController : Controller
     {
+        IData _data;
+
+        public DiscountController(IData data)
+        {
+            _data = data;
+        }
         // GET: Discount
         public ActionResult Index()
         {
+                ViewData["Day"] = true;
+                ViewData["Collection"] = GetDays();
             return View();
         }
 
-        public ActionResult Discount()
+        private IEnumerable<Day> GetDays()
         {
-            return RedirectToAction("Index");
+            return _data.GetDays();
         }
 
-        public ActionResult Service()
+        private IEnumerable<Duration> GetPeriods()
         {
-            return RedirectToAction("Index", "Service");
+            return _data.GetPeriods();
         }
 
-        public ActionResult Reservation()
+        public ActionResult Duration()
         {
-            return RedirectToAction("Index", "Reservation");
-        }
-
-        public ActionResult Client()
-        {
-            return RedirectToAction("Index", "Client");
-        }
-
-        public ActionResult Room()
-        {
-            return RedirectToAction("Index", "Room");
-        }
-
-        public ActionResult Main()
-        {
-            return RedirectToAction("Main", "Home");
+            ViewData["Day"] = false;
+            ViewData["Collection"] = GetPeriods();
+            return View("Index");
         }
     }
 }
