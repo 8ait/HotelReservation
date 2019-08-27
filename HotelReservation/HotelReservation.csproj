@@ -146,7 +146,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\Helpers\HelperLayout.cs" />
+    <Compile Include="Common\Interfaces\IData.cs" />
     <Compile Include="Common\Interfaces\IRepository.cs" />
+    <Compile Include="Common\Logic\Data.cs" />
     <Compile Include="Common\Logic\HotelContext.cs" />
     <Compile Include="Common\Logic\HotelRepository.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -156,7 +159,6 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\Duration.cs" />
-    <Compile Include="Models\MainPage.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RS.cs" />
@@ -198,6 +200,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Service.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

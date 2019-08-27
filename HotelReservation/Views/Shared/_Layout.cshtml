@@ -15,15 +15,16 @@
             <h2>Royal Palace Inn</h2>
         </div>
         <nav class="navbar navbar-default">
-            <div class="btn-group btn-block btn-lg">             
-                <button type="button" class="btn btn-dark navbar-btn">Главная</button>
-                <button type="button" class="btn btn-dark navbar-btn">Клиенты</button>
-                <button type="button" class="btn btn-dark navbar-btn">Бронь</button>
-                <button type="button" class="btn btn-dark navbar-btn">Скидки</button>
-                <button type="button" class="btn btn-dark navbar-btn">Номера</button>
-                <button type="button" class="btn btn-dark navbar-btn">Сервисы</button>
-            </div>
+            <div class="btn-group btn-block btn-lg">
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Главная</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Клиенты</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Бронь</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Номера</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Сервисы</button>
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='@Url.Action("Index")'">Скидки</button>                           
+            </div>            
         </nav>
+
 
         @RenderBody()
         @Scripts.Render("~/bundles/jquery")

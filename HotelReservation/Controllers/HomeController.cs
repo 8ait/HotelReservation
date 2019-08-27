@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HotelReservation.Common.Interfaces;
+using HotelReservation.Common.Helpers;
 
 namespace HotelReservation.Controllers
 {
@@ -19,8 +20,13 @@ namespace HotelReservation.Controllers
 
         public ActionResult Index()
         {
-
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(int id)
+        {
+            return View(HelperLayout.Main());
         }
     }
 }

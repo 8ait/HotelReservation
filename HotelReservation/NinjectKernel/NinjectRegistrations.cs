@@ -13,6 +13,7 @@ namespace HotelReservation.NinjectKernel
         public override void Load()
         {
             Bind<IRepository>().To<HotelRepository>().WithConstructorArgument("context", new HotelContext());
+            Bind<IData>().To<Data>();
         }
     }
 }
