@@ -1,16 +1,40 @@
 ﻿@{
-    ViewData["Title"] = "Скидки";
+    ViewData["Title"] = "Бронирования";
 }
 
 <body>
-    <div class="container">
-        <div class="jumbotron">
-            <div class="text-center">
-                <h4>Как использовать скидки</h4>
-            </div>
-
-        </div>
-
-
+    <h1>Введите/измените информацию о бронировании</h1>
+    <div class="form-group">
+        <label for="ReservationNumber">Номер брони</label>
+        <input type="number" class="form-control" id="ReservationNumber" placeholder="Здесь будет номер брони динамически" readonly>
+    </div>
+    <div class="form-group">
+        <label for="ReservationStatus">Статус бронирования</label>
+        <select class="form-control" id="ReservationStatus">
+            <option>Не выбрано</option>
+            <option>Свободен</option>
+            <option>Занят</option>
+            <option>Забронирован</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="ClientCode">Код клиента</label>
+        <input type="number" class="form-control" id="ClientCode">
+    </div>
+    <div class="form-group">
+        <label for="RoomCode">Код номера</label>
+        <input type="number" class="form-control" id="RoomCode">
+    </div>
+    <div class="form-group">
+        <label for="CheckInDay">День заезда</label>
+        <input type="date" class="form-control" id="CheckInDay">
+    </div>
+    <div class="form-group">
+        <label for="CheckOutDay">День выезда</label>
+        <input type="date" class="form-control" id="CheckOutDay">
+    </div>
+    <div class="form-group">
+        <label for="Cost">Общая цена</label>
+        <input type="number" class="form-control" id="Cost" placeholder="Подсчитывается динамически" readonly>
     </div>
 </body>
