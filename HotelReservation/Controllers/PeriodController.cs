@@ -27,5 +27,14 @@ namespace HotelReservation.Controllers
         {
             return _data.GetPeriods();
         }
+
+        [HttpGet]
+        public ActionResult EditModel(int id, int count)
+        {
+            Duration duration = _data.GetDuration(id);
+            duration.Discount = count;
+            _data.EditDuration(duration);
+            return RedirectToAction("Index");
+        }
     }
 }

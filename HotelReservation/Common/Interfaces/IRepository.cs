@@ -14,10 +14,13 @@ namespace HotelReservation.Common.Interfaces
         IEnumerable<Client> GetClients();
         IEnumerable<Day> GetDays();
         IEnumerable<Duration> GetPeriods();
+        
 
         Client GetClient(int id);
         Day GetDay(int id);
+        Duration GetDuration(int id);
         void EditDay(Day day);
+        void EditDuration(Duration duration);
 
     }
 }

@@ -47,9 +47,20 @@ namespace HotelReservation.Common.Logic
             return db.Days.Find(id);
         }
 
+        public Duration GetDuration(int id)
+        {
+            return db.Durations.Find(id);
+        }
+
         public void EditDay(Day day)
         {
             db.Entry(day).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void EditDuration(Duration duration)
+        {
+            db.Entry(duration).State = EntityState.Modified;
             db.SaveChanges();
         }
 

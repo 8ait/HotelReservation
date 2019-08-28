@@ -32,9 +32,20 @@ namespace HotelReservation.Common.Logic
             return day;
         }
 
+        public Duration GetDuration(int id)
+        {
+            Duration duration = _repository.GetDuration(id);
+            return duration;
+        }
+
         public void EditDay(Day day)
         {
             _repository.EditDay(day);
+        }
+
+        public void EditDuration(Duration duration)
+        {
+            _repository.EditDuration(duration);
         }
     }
 }
