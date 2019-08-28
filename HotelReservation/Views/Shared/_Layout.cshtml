@@ -28,20 +28,20 @@
                 <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=2'">Бронь &#9997;</button>
                 <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=3'">Номера &#127750;</button>
                 <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=4'">Сервисы &#9749;</button>
-                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href='Home/GetPage?id=5'">Скидки &#128293;</button>                           
-            </div>            
+                <button type="button" class="btn btn-dark navbar-btn" onclick="location.href ='Home/GetPage?id=5'">Скидки &#128293;</button>                           
+            </div>
         </nav>
         <script>
             $("button[data-form-method='post']").click(function (event) {
                 event.preventDefault();
-                var element = $(this);
-                var action = element.attr("href");
-                element.closest("form").each(function () {
-                    var form = $(this);
-                    form.attr("action", action);
-                    form.submit();
-                });
-            });
+                    var element = $(this);
+                    var action = element.attr("href");
+                    element.closest("form").each(function () {
+                        var form = $(this);
+                        form.attr("action", action);
+                        form.submit();
+                    });
+                    });
         </script>
         <br />
 

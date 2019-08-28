@@ -15,7 +15,9 @@ namespace HotelReservation.Common.Interfaces
         IEnumerable<Day> GetDays();
         IEnumerable<Duration> GetPeriods();
 
-        Client Get(int id);
+        Client GetClient(int id);
+        Day GetDay(int id);
+        void EditDay(Day day);
 
     }
 }

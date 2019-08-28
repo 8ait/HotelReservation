@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using HotelReservation.Common.Interfaces;
 using HotelReservation.Models;
+using System.Data.Entity;
 
 namespace HotelReservation.Common.Logic
 {
@@ -36,9 +37,20 @@ namespace HotelReservation.Common.Logic
             return db.Durations;
         }
 
-        public Client Get(int id)
+        public Client GetClient(int id)
         {
             return db.Clients.Find(id);
+        }
+
+        public Day GetDay(int id)
+        {
+            return db.Days.Find(id);
+        }
+
+        public void EditDay(Day day)
+        {
+            db.Entry(day).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
         protected void Dispose(bool disposing)

@@ -25,5 +25,16 @@ namespace HotelReservation.Common.Logic
         {
             return _repository.GetPeriods();
         }
+
+        public Day GetDay(int id)
+        {
+            Day day = _repository.GetDay(id);
+            return day;
+        }
+
+        public void EditDay(Day day)
+        {
+            _repository.EditDay(day);
+        }
     }
 }

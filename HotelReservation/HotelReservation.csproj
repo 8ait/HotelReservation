@@ -46,9 +46,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CRUD, Version=2.0.1.9, Culture=neutral, PublicKeyToken=e6e087e0b519261e, processorArchitecture=MSIL">
+      <HintPath>..\packages\CRUD.2.0.1.9\lib\net40\CRUD.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CRUDAtributos, Version=1.0.0.2, Culture=neutral, PublicKeyToken=e6e087e0b519261e, processorArchitecture=MSIL">
+      <HintPath>..\packages\CRUDAtributos.1.0.0.2\lib\net35\CRUDAtributos.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="FuncoesExternas, Version=1.0.0.9, Culture=neutral, PublicKeyToken=e6e087e0b519261e, processorArchitecture=MSIL">
+      <HintPath>..\packages\FuncoesExternas.1.0.0.9\lib\net40\FuncoesExternas.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -153,8 +165,9 @@
     <Compile Include="Common\Logic\HotelContext.cs" />
     <Compile Include="Common\Logic\HotelRepository.cs" />
     <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\DiscountController.cs" />
+    <Compile Include="Controllers\DayController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PeriodController.cs" />
     <Compile Include="Controllers\Redirector.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
@@ -207,10 +220,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
-    <Content Include="Views\Discount\Index.cshtml" />
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\Day\Index.cshtml" />
+    <Content Include="Views\Period\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
