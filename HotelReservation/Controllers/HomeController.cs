@@ -13,7 +13,7 @@ namespace HotelReservation.Controllers
         IData _data;
         IRedirector _redirector;
         
-        public HomeController(IRepository repository, IData data, IRedirector redirector)
+        public HomeController(IData data, IRedirector redirector)
         {
             _data = data;
             _redirector = redirector;

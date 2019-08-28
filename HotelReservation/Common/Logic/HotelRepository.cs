@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using HotelReservation.Common.Interfaces;
 using HotelReservation.Models;
+using System.Data.Entity;
 
 namespace HotelReservation.Common.Logic
 {
@@ -21,14 +22,35 @@ namespace HotelReservation.Common.Logic
             db.SaveChanges();
         }
 
-        public IEnumerable<Client> List()
+        public IEnumerable<Client> GetClients()
         {
             return db.Clients;
         }
 
-        public Client Get(int id)
+        public IEnumerable<Day> GetDays()
+        {
+            return db.Days;
+        }
+
+        public IEnumerable<Duration> GetPeriods()
+        {
+            return db.Durations;
+        }
+
+        public Client GetClient(int id)
         {
             return db.Clients.Find(id);
+        }
+
+        public Day GetDay(int id)
+        {
+            return db.Days.Find(id);
+        }
+
+        public void EditDay(Day day)
+        {
+            db.Entry(day).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
         protected void Dispose(bool disposing)

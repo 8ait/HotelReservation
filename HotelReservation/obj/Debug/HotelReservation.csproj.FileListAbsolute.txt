@@ -55,3 +55,6 @@ C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Common.xml
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Common.WebHost.xml
 C:\GitProjects\hotel\HotelReservation\bin\Ninject.Web.Mvc.xml
 C:\GitProjects\hotel\HotelReservation\obj\Debug\HotelReservation.csprojResolveAssemblyReference.cache
+C:\GitProjects\hotel\HotelReservation\bin\CRUD.dll
+C:\GitProjects\hotel\HotelReservation\bin\CRUDAtributos.dll
+C:\GitProjects\hotel\HotelReservation\bin\FuncoesExternas.dll

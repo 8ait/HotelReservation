@@ -10,7 +10,14 @@ namespace HotelReservation.Common.Interfaces
     public interface IRepository
     {
         void Save(Client client);
-        IEnumerable<Client> List();
-        Client Get(int id);
+
+        IEnumerable<Client> GetClients();
+        IEnumerable<Day> GetDays();
+        IEnumerable<Duration> GetPeriods();
+
+        Client GetClient(int id);
+        Day GetDay(int id);
+        void EditDay(Day day);
+
     }
 }

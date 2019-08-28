@@ -1,0 +1,71 @@
+﻿@using HotelReservation.Models;
+@{
+}
+<body>
+    <div class="container">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <div class="text-center">
+                <h5>Работа со скидками для периодов</h5>
+            </div>
+            <div class="row">
+                <p>
+                    Каждая бронь имеет свой период. Когда длительность брони входит в определенный отрезок
+                    времени из периодов, то общая сумма брони пересчитывается в соответсвии со скидкой. Чтобы
+                    редактировать период кликните по нужному периоду. 
+                </p>
+            </div>
+        </div>
+        <div class="text-center">
+            <div class="btn-group btn-block btn-group-lg justify-content-center">
+
+                <button type="button" class="btn btn-outline-success navbar-btn" onclick="location.href = 'Home/GetPage?id=5'">Дни недели &#128197;</button>
+                <button type="button" class="btn btn-outline-success navbar-btn active">Периоды &#128336;</button>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <div class="list-group">
+                        @foreach (Duration item in (IEnumerable<Duration>)ViewData["Collection"])
+                        {
+                            <a class="list-group-item list-group-item-success d-flex justify-content-between align-items-center" onclick="">
+                                @if (item.DurationId == 0)
+                                {
+                                    <strong>От 0 до 4 дней</strong>
+                                }
+                                else if (item.DurationId == 1)
+                                {
+                                    <strong>От 5 до 9 дней</strong>
+                                }
+                                else if (item.DurationId == 2)
+                                {
+                                    <strong>От 10 до 14 дней</strong>
+                                }
+                                else if (item.DurationId == 3)
+                                {
+                                    <strong>От 15 до 19 дней</strong>
+                                }
+                                else if (item.DurationId == 4)
+                                {
+                                    <strong>От 20 до 24 дней</strong>
+                                }
+                                else if (item.DurationId == 5)
+                                {
+                                    <strong>От 25 до 29 дней</strong>
+                                }
+                                else if (item.DurationId == 6)
+                                {
+                                    <strong>От 30 дней и больше</strong>
+                                }
+                                <span class="badge badge-success badge-pill">@item.Discount</span>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
