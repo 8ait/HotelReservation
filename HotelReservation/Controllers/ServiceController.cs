@@ -19,20 +19,53 @@ namespace HotelReservation.Controllers
         public ServiceController(IData data)
         {
             _data = data;
-            _currentPage = 1;
-            GetPage(_currentPage);
+            GetPage();
         }
 
-        public void GetPage(int page)
+        public void GetPage(int page = 1)
         {
             _currentPage = page;
             _service = _data.GetServicesOnPage(page, _numberOfServiceOnPage);
-            Index();
+        }
+
+        public ViewResult LoadPage(int page)
+        {
+            GetPage(page);
+            ViewData["Services"] = _service;
+            ViewData["CurrentPage"] = _currentPage;
+            ViewData["Pages"] = GetCountOfPages();
+            return View("Index");
+        }
+
+        public ViewResult CreateService(string name, int cost)
+        {
+            _data.CreateService(name, cost);
+            return LoadPage(GetCountOfPages());
+        }
+
+        [HttpGet]
+        public ViewResult EditService(int id, string name, int cost, int page)
+        {
+            _data.EditService(id, name, cost);
+             return LoadPage(page);
+        }
+
+        public ViewResult DeleteService(int id)
+        {
+            _data.DeleteService(id);
+            return LoadPage(1);
+        }
+
+        private int GetCountOfPages()
+        {
+            return _data.GetCountOfPages(_numberOfServiceOnPage);
         }
 
         public ActionResult Index()
         {
             ViewData["Services"] = _service;
+            ViewData["CurrentPage"] = _currentPage;
+            ViewData["Pages"] = GetCountOfPages();
             return View();
         }
 

@@ -19,8 +19,12 @@ namespace HotelReservation.Common.Interfaces
         Client GetClient(int id);
         Day GetDay(int id);
         Duration GetDuration(int id);
+        Service GetService(int id);
         void EditDay(Day day);
         void EditDuration(Duration duration);
+        void EditService(Service service);
+        void DeleteService(int id);
+        void CreateService(Service service);
 
     }
 }

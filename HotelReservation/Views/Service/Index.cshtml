@@ -40,7 +40,7 @@
                         </th>
                         <th>
                             <div class="text-center">
-                                <button class="btn btn-success">
+                                <button class="btn btn-success" onclick="CreateModal()">
                                     Создать&#10133;
                                 </button>
                             </div>
@@ -68,10 +68,10 @@
                             </td>
                             <td>
                                 <div class="btn-group btn-block">
-                                    <button class="btn btn-info">
+                                    <button class="btn btn-info" value="@item.ServiceId |@item.Name |@item.Cost |@ViewData["CurrentPage"]" id="@item.ServiceId" onclick="ShowModal(@item.ServiceId)">
                                         &#9999;
                                     </button>
-                                    <button class="btn btn-danger">
+                                    <button class="btn btn-danger" value="@item.ServiceId |@item.Name" id="@item.ServiceId" onclick="DeleteModal(@item.ServiceId)">
                                         &#128465;
                                     </button>
                                 </div>
@@ -81,28 +81,138 @@
                 </tbody>
             </table>
             <br />
-            <div class="btn-group text-center btn-block">
-                <button class="btn btn-outline-info">
-                    &#171;
-                </button>
-                <button class="btn btn-outline-info">
-                    1
-                </button>
-                <button class="btn btn-outline-info">
-                    2
-                </button>
-                <button class="btn btn-outline-info">
-                    3
-                </button>
-                <button class="btn btn-outline-info">
-                    &#187;
-                </button>
+            <div class="text-center">
+                <strong>Страница</strong>
+                <input class="text-center" id="f1" type="number" min="1" max="@ViewData["Pages"]" style="width: 8%" value="@ViewData["CurrentPage"]"/>
+                <strong>из @ViewData["Pages"]</strong>
             </div>
+            <br />
+            <div class="text-center">
+                <button class="btn btn-warning" onclick="GetPage()"><strong>Перейти</strong>&#128640;</button>
+            </div>
+            <!--EditModal-->
+            <div class="modal fade" id="EditModal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="text-center">
+                                <h5><strong>Редактировать услугу &#9999;</strong></h5>
+                            </div>
+                        </div>
+                        <div class="modal-body text-center">
+                                <strong>Название услуги</strong>
+                                @Html.TextBox("serviceName", "", new { @class = "form-control", id = "EditModal_serviceName" })
+                                <strong>Стоимость услуги</strong>
+                                @Html.TextBox("serviceCost", "", new { @class = "form-control", id = "EditModal_serviceCost" })
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Update()">Изменить</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="DeleteModal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="text-center">
+                                <h5><strong>Удалить услугу &#128465;</strong></h5>
+                            </div>
+                        </div>
+                        <div class="modal-body text-center">
+                            <strong>Удалить услугу?</strong>
+                            <div>
+                                <br />
+                                <input id="nameOfService" class="text-center" style="width: 75%" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Delete()">Удалить</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="CreateModal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="text-center">
+                                <h5><strong>Создать услугу &#9989;</strong></h5>
+                            </div>
+                        </div>
+                        <div class="modal-body text-center">
+                            <strong>Название услуги</strong>
+                            @Html.TextBox("serviceName", "", new { @class = "form-control", id = "CreateModal_serviceName" })
+                            <strong>Стоимость услуги</strong>
+                            @Html.TextBox("serviceCost", "", new { @class = "form-control", id = "CreateModal_serviceCost" })
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Create()">Создать</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @section scripts{
+            <script>
+                function GetPage() {
+                    var page = $("#f1").val();
+                    document.location.href = "../Service/LoadPage?page=" + page;
+                }
+                var key;
+                var page_key;
+                var modal_mode;
+                function DeleteModal(serviceId) {
+                    var dataStr = $("#" + serviceId).val();
+                    var dataArray = dataStr.split("|");
+                    var serviceId = dataArray[0];
+                    var serviceName = dataArray[1];
+                    key = serviceId;
+                    $("#nameOfService").val(serviceName);
+                    $('#DeleteModal').modal('show');
+                }
+                function ShowModal(serviceId) {
+                    var dataStr = $("#" + serviceId).val();
+                    var dataArray = dataStr.split("|");
+                    var serviceId = dataArray[0];
+                    var serviceName = dataArray[1];
+                    var serviceCost = dataArray[2];
+                    var currentPage = dataArray[3];
+                    key = serviceId;
+                    page_key = currentPage;
+                    $("#EditModal_serviceName").val(serviceName);
+                    $("#EditModal_serviceCost").val(serviceCost);
+                    $('#EditModal').modal('show');
+                }
+                function CreateModal() {
+                    $('#CreateModal').modal('show');
+                }
+                function Create() {
+                    var serviceName = $("#CreateModal_serviceName").val();
+                    var serviceCost = $("#CreateModal_serviceCost").val();
+                    document.location.href = "../Service/CreateService?name=" + serviceName + "&cost=" + serviceCost;
+                }
+                function Update() {
+                    var serviceID = key;
+                    var serviceName = $("#EditModal_serviceName").val();
+                    var serviceCost = $("#EditModal_serviceCost").val();
+                    document.location.href = "../Service/EditService?id=" + serviceID + "&name=" + serviceName + "&cost=" + serviceCost + "&page=" + page_key;
+                }
+                function Delete() {
+                    var serviceID = key;
+                    document.location.href = "../Service/DeleteService?id=" + serviceID;
+                }
+            </script>
+                }
         </div>
         </div>
         <div class="col-md-5">
             <div class="jumbotron">
-
+                <div class="text-center">
+                    <h5>Фильтр</h5>
+                </div>
             </div>
         </div>
         </div>
