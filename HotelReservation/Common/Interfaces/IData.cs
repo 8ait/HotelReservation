@@ -13,6 +13,7 @@ namespace HotelReservation.Common.Interfaces
         IEnumerable<Duration> GetPeriods();
         Day GetDay(int id);
         Duration GetDuration(int id);
+        List<Service> GetServicesOnPage(int currentPage, int itemsOnPage);
         void EditDay(Day day);
         void EditDuration(Duration duration);
     }

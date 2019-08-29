@@ -64,6 +64,11 @@ namespace HotelReservation.Common.Logic
             db.SaveChanges();
         }
 
+        public IEnumerable<Service> GetServices()
+        {
+            return db.Services;
+        }
+
         protected void Dispose(bool disposing)
         {
             if (disposing)

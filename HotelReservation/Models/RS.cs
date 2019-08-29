@@ -9,5 +9,6 @@ namespace HotelReservation.Models
     {
         public int ReservationId { get; set; }
         public int SeviceId { get; set; }
+
     }
 }

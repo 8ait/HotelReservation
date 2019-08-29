@@ -43,6 +43,19 @@ namespace HotelReservation.Common.Logic
             _repository.EditDay(day);
         }
 
+        public List<Service> GetServicesOnPage(int currentPage, int itemsOnPage)
+        {
+            List<Service> servicesOnPage = new List<Service>();
+            List<Service> services = _repository.GetServices().ToList();
+            int start = currentPage * itemsOnPage - (itemsOnPage - 1);
+            int end = currentPage * itemsOnPage;
+            for (int i = start; i <= end; i++)
+            {
+                servicesOnPage.Add(services[i]);
+            }
+            return servicesOnPage;
+        }
+
         public void EditDuration(Duration duration)
         {
             _repository.EditDuration(duration);
