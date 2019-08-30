@@ -28,33 +28,35 @@ namespace HotelReservation.Controllers
             _service = _data.GetServicesOnPage(page, _numberOfServiceOnPage);
         }
 
-        public ViewResult LoadPage(int page)
+        public ActionResult LoadPage(int page)
         {
             GetPage(page);
             ViewData["Services"] = _service;
             ViewData["CurrentPage"] = _currentPage;
             ViewData["Pages"] = GetCountOfPages();
-            return View("Index");
-        }
-
-        public ViewResult CreateService(string name, int cost)
-        {
-            _data.CreateService(name, cost);
-            return LoadPage(GetCountOfPages());
+            return PartialView();
         }
 
         [HttpGet]
-        public ViewResult EditService(int id, string name, int cost, int page)
+        public ActionResult CreateService(string name, int cost)
         {
-            _data.EditService(id, name, cost);
-             return LoadPage(page);
+            _data.CreateService(name, cost);
+            return RedirectToAction("LoadPage", new { page = GetCountOfPages() });
         }
 
-        public ViewResult DeleteService(int id)
+        [HttpGet]
+        public ActionResult EditService(int id, string name, int cost, int page)
+        {
+            _data.EditService(id, name, cost);
+            return RedirectToAction("LoadPage", new { page = page });
+        }
+
+        [HttpGet]
+        public ActionResult DeleteService(int id, int page)
         {
             _data.DeleteService(id);
-            return LoadPage(1);
-        }
+            return RedirectToAction("LoadPage", new { page = page});
+        } 
 
         private int GetCountOfPages()
         {

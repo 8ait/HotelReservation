@@ -47,6 +47,10 @@ namespace HotelReservation.Common.Logic
         {
             List<Service> servicesOnPage = new List<Service>();
             List<Service> services = _repository.GetServices().ToList();
+            if (currentPage > GetCountOfPages(itemsOnPage))
+            {
+                currentPage = GetCountOfPages(itemsOnPage);
+            }
             int start = currentPage * itemsOnPage - (itemsOnPage - 1);
             int end = currentPage * itemsOnPage;
             if (end > services.Count)

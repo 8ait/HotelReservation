@@ -209,6 +209,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -225,6 +227,7 @@
     <Content Include="Views\Service\Index.cshtml" />
     <Content Include="Views\Day\Index.cshtml" />
     <Content Include="Views\Period\Index.cshtml" />
+    <Content Include="Views\Service\LoadPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
