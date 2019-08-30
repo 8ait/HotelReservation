@@ -58,7 +58,7 @@
                             <button class="btn btn-info" value="@item.ServiceId |@item.Name |@item.Cost |@ViewData["CurrentPage"]" id="@item.ServiceId" onclick="ShowModal(@item.ServiceId)">
                                 &#9999;
                             </button>
-                            <button class="btn btn-danger" value="@item.ServiceId |@item.Name" id="@item.ServiceId" onclick="DeleteModal(@item.ServiceId)">
+                            <button class="btn btn-danger" value="@item.ServiceId |@item.Name" id="@item.ServiceId" onclick="DeleteModal(@item.ServiceId, @ViewData["CurrentPage"])">
                                 &#128465;
                             </button>
                         </div>

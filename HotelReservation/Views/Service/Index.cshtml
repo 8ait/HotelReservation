@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-8">
         <div class="jumbotron">
                 <div id="services">
                 </div>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Delete(@ViewData["CurrentPage"])">Удалить</button>
+                            <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Delete()">Удалить</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
                         </div>
                     </div>
@@ -107,12 +107,11 @@
                 var key;
                 var page_key;
                 var modal_mode;
-                function DeleteModal(serviceId) {
+                function DeleteModal(serviceId, currentPage) {
                     var dataStr = $("#" + serviceId).val();
                     var dataArray = dataStr.split("|");
                     var serviceId = dataArray[0];
                     var serviceName = dataArray[1];
-                    var currentPage = dataArray[2];
                     page_key = currentPage;
                     key = serviceId;
                     $("#nameOfService").val(serviceName);
@@ -149,9 +148,9 @@
                     serviceIP = serviceIP.replace(/\s*/g, '');
                     $('#services').load(serviceIP);
                 }
-                function Delete(currentPage) {
+                function Delete() {
                     var serviceID = key;
-                    var serviceIP = "../Service/DeleteService?id=" + serviceID + "&page=" + currentPage;
+                    var serviceIP = "../Service/DeleteService?id=" + serviceID + "&page=" + page_key;
                     serviceIP = serviceIP.replace(/\s*/g, '');
                     $('#services').load(serviceIP);
                 }
@@ -159,11 +158,26 @@
                 }
         </div>
         </div>
-        <div class="col-md-5">
-            <div class="jumbotron">
-                <div class="text-center">
-                    <h5>Фильтр</h5>
+        <div class="col-md-4">
+            <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <div class="row">
+                    <p>
+                        Механизм поиска ищет подстроку в строке названия.
+                    </p>
                 </div>
+            </div>
+            <div class="jumbotron" style="background-color: #F0E68C">
+                <form class="form-group text-center">
+                    <H5>Поиск по названию</H5>
+                    <br />
+                    <div class="form-group">
+                        <label for="inputPassword2" class="sr-only">Password</label>
+                        <input type="text" class="form-control" id="searchName" placeholder="Введите название">
+                    </div>
+                    <button class="btn btn-primary">Найти&#128270;</button>
+                    <button class="btn btn-danger">Сбросить&#128259;</button>
+                </form>
             </div>
         </div>
         </div>

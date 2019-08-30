@@ -24,7 +24,7 @@ namespace HotelReservation.Controllers
 
         public void GetPage(int page = 1)
         {
-            _currentPage = page;
+            _currentPage = _data.GetValidatePage(page, _numberOfServiceOnPage);
             _service = _data.GetServicesOnPage(page, _numberOfServiceOnPage);
         }
 

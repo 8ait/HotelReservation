@@ -47,10 +47,7 @@ namespace HotelReservation.Common.Logic
         {
             List<Service> servicesOnPage = new List<Service>();
             List<Service> services = _repository.GetServices().ToList();
-            if (currentPage > GetCountOfPages(itemsOnPage))
-            {
-                currentPage = GetCountOfPages(itemsOnPage);
-            }
+            currentPage = GetValidatePage(currentPage, itemsOnPage);
             int start = currentPage * itemsOnPage - (itemsOnPage - 1);
             int end = currentPage * itemsOnPage;
             if (end > services.Count)
@@ -62,6 +59,29 @@ namespace HotelReservation.Common.Logic
                 servicesOnPage.Add(services[i]);
             }
             return servicesOnPage;
+        }
+
+        public int GetValidatePage(int page, int itemsOnPage)
+        {
+            if (page > GetCountOfPages(itemsOnPage))
+            {
+                page = GetCountOfPages(itemsOnPage);
+            }
+            return page;
+        }
+
+        public List<Service> ContainsService(string name)
+        {
+            List<Service> service = new List<Service>();
+            List<Service> services = _repository.GetServices().ToList();
+            foreach(Service serv in services)
+            {
+                if (serv.Name.Contains(name))
+                {
+                    service.Add(serv);
+                }
+            }
+            return service;
         }
 
         public int GetCountOfPages(int itemsOnPage)
