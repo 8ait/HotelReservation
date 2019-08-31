@@ -8,7 +8,6 @@ namespace HotelReservation.Models
     public class Room
     {
         public int RoomId { get; set; }
-        public int Status { get; set; }
         public int NumberOfPlaces { get; set; }
         public int Category { get; set; }
         public int Cost { get; set; }

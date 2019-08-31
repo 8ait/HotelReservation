@@ -28,13 +28,26 @@ namespace HotelReservation.Controllers
             _service = _data.GetServicesOnPage(page, _numberOfServiceOnPage);
         }
 
-        public ActionResult LoadPage(int page)
+        public ActionResult LoadPage(int page = 1)
         {
             GetPage(page);
             ViewData["Services"] = _service;
             ViewData["CurrentPage"] = _currentPage;
             ViewData["Pages"] = GetCountOfPages();
             return PartialView();
+        }
+
+        public ActionResult SearchPage(string name)
+        {
+            if (name != null)
+            {
+                ViewData["SearchName"] = name;
+                ViewData["Services"] = _data.GetSearchService(name);
+                return PartialView();
+            } else
+            {
+                return RedirectToAction("LoadPage");
+            }
         }
 
         [HttpGet]

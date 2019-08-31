@@ -58,7 +58,7 @@
                             <strong>Удалить услугу?</strong>
                             <div>
                                 <br />
-                                <input id="nameOfService" class="text-center" style="width: 75%" readonly="readonly">
+                                <input id="nameOfService" class="text-center" style="width: 75%" readonly>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -88,14 +88,41 @@
                         </div>
                     </div>
                 </div>
+            </div>            
+        </div>
+        </div>
+        <div class="col-md-4">
+            <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <div class="row">
+                    <p>
+                        Механизм поиска ищет подстроку в строке названия.
+                    </p>
+                </div>
             </div>
-            @section scripts{
-            <script type="text/javascript">
+            <div class="jumbotron" style="background-color: #F0E68C">
+                <div class="text-center">
+                    <H5>Поиск по названию</H5>
+                    <br />
+                    <div class="text-center">
+                        <input type="text" class="form-control" id="searchName" placeholder="Введите название">
+                    </div>
+                    <br/>
+                    <button class="btn btn-primary" onclick="Search()">Найти &#128270;</button>
+                    <button class="btn btn-danger" onclick="GetStartView()">Сбросить &#128259;</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    @section scripts{
+        <script type="text/javascript">
                 $.noConflict();
 
                 window.onload = GetStartView();
 
                 function GetStartView() {
+                    $("#searchName").val(null);
                     $('#services').load("../Service/LoadPage?page=1");
                 }
 
@@ -154,33 +181,11 @@
                     serviceIP = serviceIP.replace(/\s*/g, '');
                     $('#services').load(serviceIP);
                 }
-            </script>
+                function Search() {
+                    var searchName = $("#searchName").val();
+                    var serviceIP = "../Service/SearchPage?name=" + searchName;
+                    $('#services').load(serviceIP);
                 }
-        </div>
-        </div>
-        <div class="col-md-4">
-            <div class="alert alert-warning">
-                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <div class="row">
-                    <p>
-                        Механизм поиска ищет подстроку в строке названия.
-                    </p>
-                </div>
-            </div>
-            <div class="jumbotron" style="background-color: #F0E68C">
-                <form class="form-group text-center">
-                    <H5>Поиск по названию</H5>
-                    <br />
-                    <div class="form-group">
-                        <label for="inputPassword2" class="sr-only">Password</label>
-                        <input type="text" class="form-control" id="searchName" placeholder="Введите название">
-                    </div>
-                    <button class="btn btn-primary">Найти&#128270;</button>
-                    <button class="btn btn-danger">Сбросить&#128259;</button>
-                </form>
-            </div>
-        </div>
-        </div>
-
-    </div>
+        </script>
+    }
 </body>

@@ -95,6 +95,20 @@ namespace HotelReservation.Common.Logic
             }
         }
 
+        public List<Service> GetSearchService(string name)
+        {
+            List<Service> searchService = new List<Service>();
+            List<Service> service = _repository.GetServices().ToList();
+            foreach(Service serv in service)
+            {
+                if (serv.Name.Contains(name))
+                {
+                    searchService.Add(serv);
+                }
+            }
+            return searchService;
+        }
+
         public void CreateService(string name, int cost)
         {
             Service service = new Service();
