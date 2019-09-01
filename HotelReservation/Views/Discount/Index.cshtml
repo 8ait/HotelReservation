@@ -1,0 +1,152 @@
+﻿@using HotelReservation.Models;
+@{
+    ViewData["Title"] = "Скидки";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<body>
+    <div class="container">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <div class="text-center">
+                <h5>Работа со скидками для дней недели и периодов.</h5>
+            </div>
+            <div class="row">
+                <p>
+                    Когда бронь пересчитывается, каждый день недели будет иметь свою стоимость от фиксированной стоимости дня в брони.
+                    Дни недели и их скидки расположены ниже. Чтобы редактировать нужный день кликните по нему.
+                </p>
+                <p>
+                    Каждая бронь имеет свой период. Когда длительность брони входит в определенный отрезок
+                    времени из периодов, то общая сумма брони пересчитывается в соответсвии со скидкой. Чтобы
+                    редактировать период кликните по нужному периоду.
+                </p>
+            </div>
+        </div>
+        <!--Здесь находится блок в который подгружается частичное представление с помощью js скрипта-->
+        <div id="results">
+
+        </div>
+    </div>
+    @section scripts{
+        <script type="text/javascript">
+            
+            /* Код в js получился более чем большой
+            По сути браузер каждый раз при выполнении скрипта подгружает его из html разметки,
+            тем самым у нас есть некоторые тормозные моменты каждый раз.
+            Если вынести его в js фаил и подключить скрипт ниже фреймов, то он будет подргужаться только один раз,
+            а потом браться из кэша.
+            Поэтому Никита сделай рефакторинг.
+            */
+
+            $.noConflict(); /* Иногда если не хочешь париться когда подключаешь скрипты фреймов, используй эту функцию.
+            HTML признает подключение только в определенном порядке, так как одни фреймы зависят от других.
+            Курить че от кого зависит иногда может потратить много твоего времени. Но это говно код
+            */
+
+            var key; // глобальная переменная, которая запоминает id нажатого обьекта
+
+            window.onload = UpdateDays(); // Сразу добавляем частичное представление дней по загрузке формы
+
+            //Функция, вызывающая модальное окно для дня недели.
+            function ShowModalDay(dayId) {
+                var dataStr = $("#" + dayId).val();
+                var dataArray= dataStr.split("|");
+                var dayId = dataArray[0];
+                key = dayId;
+                var dayDiscount = dataArray[1];
+                $("#EditModalDay_Discount").val(dayDiscount);
+                $('#EditModalDay').modal('show');
+            }
+
+            //Функция, вызывающая модальное окно для дня периода.
+            function ShowModalPeriod(periodId) {
+                var dataStr = $("#" + periodId).val();
+                var dataArray = dataStr.split("|");
+                var periodId = dataArray[0];
+                key = periodId;
+                var periodDiscount = dataArray[1];
+                $("#EditModalPeriod_Discount").val(periodDiscount);
+                $('#EditModalPeriod').modal('show');
+            }
+
+            // Функция которая отправляет запрос на изменение дня
+            function EditDay() {
+                var dayID = key;
+                var dayDiscount = $("#EditModalDay_Discount").val(); // Значение текст бокса из модального окна
+                var dayIP = "../Discount/EditModel?id=" + dayID + "&count=" + dayDiscount + "&modeOfEdit=true"; // Формируем строку запрос
+                dayIP = dayIP.replace(/\s*/g, '');
+                $('#results').load(dayIP);
+                // так как я пишу бэкэнд, спрашивай у меня как формировать строку запроса
+                // по хорошему у нас должен быть документ описывающий нашу апишку и из него ты просто формируешь запросы и ответы
+                // да и пох
+            }
+
+            // Функция которая отправляет запрос на изменение периода
+            function EditPeriod() {
+                var periodID = key;
+                var periodDiscount = $("#EditModalPeriod_Discount").val(); // Значение текст бокса из модального окна
+                var periodIP = "../Discount/EditModel?id=" + periodID + "&count=" + periodDiscount + "&modeOfEdit=false"; // Формируем строку запроса
+                periodIP = periodIP.replace(/\s*/g, ''); // удаляем пробелы из строки
+                $('#results').load(periodIP);
+            }
+
+            // Функция которая перезагружает частичное представление для периодов
+            function UpdatePeriods() {
+                var periodsIP = "../Discount/Periods";
+                $('#results').load(periodsIP);
+            }
+            // Функция которая перезагружает частичное представление для дней
+            function UpdateDays() {
+                var daysIP = "../Discount/Days";
+                $('#results').load(daysIP);
+            }
+        </script>
+    }
+    <!--Модальное окно для редаткирования дня-->
+    <div class="modal fade" id="EditModalDay" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-center">
+                        <h5><strong>Редактировать скидку на день недели</strong></h5>
+                    </div>
+                </div>
+                <div class="modal-body text-center">
+                    <br />
+                    @Html.TextBox("Discount", "", new { @class = "form-control", id = "EditModalDay_Discount" })
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="EditDay()">Изменить</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Модальное окно для редаткирования периода-->
+    <div class="modal fade" id="EditModalPeriod" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-center">
+                        <h5><strong>Редактировать скидку на период</strong></h5>
+                    </div>
+                </div>
+                <div class="modal-body text-center">
+                    <br />
+                    @Html.TextBox("Discount", "", new { @class = "form-control", id = "EditModalPeriod_Discount" })
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="EditPeriod()">Изменить</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+

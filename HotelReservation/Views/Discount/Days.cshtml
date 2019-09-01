@@ -1,0 +1,65 @@
+﻿@using HotelReservation.Models;
+@{
+    Layout = null;
+}
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="text-center">
+    <div class="btn-group btn-block btn-group-lg justify-content-center">
+
+        <button type="button" class="btn btn-outline-success navbar-btn active" onclick="location.href = '#'">Дни недели &#128197;</button>
+        <button type="button" class="btn btn-outline-success navbar-btn" onclick="UpdatePeriods()">Периоды &#128336;</button>
+
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <div id="modDialog" class="modal fade">
+                <div id="dialogContent" class="modal-dialog"></div>
+            </div>
+            <div class="list-group">
+                @foreach (Day item in (IEnumerable<Day>)ViewData["Collection"])
+                {
+                    <button class="list-group-item list-group-item-success list-group-item-action d-flex justify-content-between align-items-center" value="@item.DayId |@item.Discount" id="@item.DayId" onclick="ShowModalDay(@item.DayId)">
+                        @if (item.DayId == 0)
+                        {
+                            <strong>Понедельник</strong>
+                        }
+                        else if (item.DayId == 1)
+                        {
+                            <strong>Вторник</strong>
+                        }
+                        else if (item.DayId == 2)
+                        {
+                            <strong>Среда</strong>
+                        }
+                        else if (item.DayId == 3)
+                        {
+                            <strong>Четверг</strong>
+                        }
+                        else if (item.DayId == 4)
+                        {
+                            <strong>Пятница</strong>
+                        }
+                        else if (item.DayId == 5)
+                        {
+                            <strong>Суббота</strong>
+                        }
+                        else if (item.DayId == 6)
+                        {
+                            <strong>Воскресенье</strong>
+                        }
+                        <span class="badge badge-success badge-pill">@item.Discount</span>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+

@@ -15,8 +15,7 @@ namespace HotelReservation.Controllers
             {2, "Reservation" },
             {3, "Room" },
             {4, "Service" },
-            {5, "Day" },
-            {6, "Period" }
+            {5, "Discount" },
         };
 
         public string GetPage(int id)
