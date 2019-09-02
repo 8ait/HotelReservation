@@ -15,14 +15,17 @@ namespace HotelReservation.Common.Interfaces
         IEnumerable<Day> GetDays();
         IEnumerable<Duration> GetPeriods();
         IEnumerable<Service> GetServices();
+        IEnumerable<Room> GetRooms();
 
         Client GetClient(int id);
         Day GetDay(int id);
         Duration GetDuration(int id);
         Service GetService(int id);
+        Room GetRoom(int id);
         void EditDay(Day day);
         void EditDuration(Duration duration);
         void EditService(Service service);
+        void EditRoom(Room room);
         void DeleteService(int id);
         void CreateService(Service service);
 

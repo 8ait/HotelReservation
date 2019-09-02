@@ -26,10 +26,21 @@ namespace HotelReservation.Common.Logic
             return _repository.GetPeriods();
         }
 
+        public IEnumerable<Room> GetRooms()
+        {
+            return _repository.GetRooms();
+        }
+
         public Day GetDay(int id)
         {
             Day day = _repository.GetDay(id);
             return day;
+        }
+
+        public Room GetRoom(int id)
+        {
+            Room room = _repository.GetRoom(id);
+            return room;
         }
 
         public Duration GetDuration(int id)
@@ -41,6 +52,11 @@ namespace HotelReservation.Common.Logic
         public void EditDay(Day day)
         {
             _repository.EditDay(day);
+        }
+
+        public void EditRoom(Room room)
+        {
+            _repository.EditRoom(room);
         }
 
         public List<Service> GetServicesOnPage(int currentPage, int itemsOnPage)
@@ -66,6 +82,9 @@ namespace HotelReservation.Common.Logic
             if (page > GetCountOfPages(itemsOnPage))
             {
                 page = GetCountOfPages(itemsOnPage);
+            } else if (page <= 0)
+            {
+                page = 1;
             }
             return page;
         }

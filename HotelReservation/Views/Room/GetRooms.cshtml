@@ -1,0 +1,83 @@
+﻿@using HotelReservation.Models;
+@{
+    Layout = null;
+}
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <table class="table table-striped table-responsive-sm table-responsive-xl table-bordered table-responsive-md">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <div class="text-center">
+                        <h6>Номер комнаты &#128273;</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Вместимость &#128582;</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Категория комфорта &#127968;</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Стоимость за сутки &#128176;</h6>
+                    </div>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Room item in (List<Room>)ViewData["Rooms"])
+            {
+                <tr>
+                    <td class="table-info">
+                        <div class="text-center">
+                            <strong>@item.RoomId</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.NumberOfPlaces</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            @if (item.Category == 0)
+                            {
+                                <strong>Люкс</strong>
+                            } else if (item.Category == 1)
+                            {
+                                <strong>Комфорт</strong>
+                            } else if (item.Category == 2)
+                            {
+                                <strong>Стандарт</strong>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.Cost</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-block">
+                            <button class="btn btn-info" value="@item.RoomId |@item.NumberOfPlaces |@item.Category |@item.Cost" id="@item.RoomId" onclick="ShowModal(@item.RoomId)">
+                                &#9999;
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</body>
+

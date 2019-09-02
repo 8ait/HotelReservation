@@ -1,17 +1,98 @@
-﻿@{
+﻿@using HotelReservation.Models;
+@{
     ViewData["Title"] = "Номера";
 }
 
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <body>
     <div class="container">
-        <div class="jumbotron">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
             <div class="text-center">
-                <h4>Как использовать скидки</h4>
+                <h5>Документация по номерам</h5>
             </div>
-
+            <div class="row">
+                <p>
+                    В гостиннице имеется 10 номеров. Они содержат кол-во человек размещаемых в номере.
+                    Номера содержат категории комфорта. Стоимость номера указана за сутки.
+                </p>
+            </div>
         </div>
-        <div class="jumbotron">
+                <div class="jumbotron">
+                    <!-- Содержит частитчное преставление о номерах-->
+                    <div id="rooms">
 
+                    </div>
+                </div>
+    </div>
+    <script>
+        $.noConflict();
+
+        window.onload = UpdateRooms();
+
+        var key;
+
+        function UpdateRooms() {
+            $('#rooms').load("Room/GetRooms");
+        }
+
+        function ShowModal(roomId) {
+            var dataStr = $("#" + roomId).val();
+            var dataArray = dataStr.split("|");
+            var roomID = dataArray[0];
+            var roomNumberOfPlaces = dataArray[1];
+            var roomCategory = dataArray[2];
+            var roomCost = dataArray[3];
+            
+            key = roomID;
+
+            $("#numberOfRoom").val(roomId);
+            $("#numberOfPlaces").val(roomNumberOfPlaces);
+            $("#cost").val(roomCost);
+            document.getElementById("GroupSelect").selectedIndex = roomCategory;
+            $('#EditModal').modal('show');
+        }
+
+        function Update() {
+            var roomID = key;
+            var roomNumberOfPlaces = $("#numberOfPlaces").val();
+            var roomCategory = document.getElementById("GroupSelect").selectedIndex;
+            var roomCost = $("#cost").val();
+            var roomIP = "../Room/EditRoom?id=" + roomID + "&numberOfPlaces=" + roomNumberOfPlaces + "&category=" + roomCategory + "&cost=" + roomCost;
+            roomIP = roomIP.replace(/\s*/g, '');
+            $('#rooms').load(roomIP);
+        }
+    </script>
+    <div class="modal fade" id="EditModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-center">
+                        <h5><strong>Редактировать номер &#9999;</strong></h5>
+                    </div>
+                </div>
+                <div class="modal-body text-center">
+                    <strong>Номер комнаты</strong>
+                    <input id="numberOfRoom" class="text-center" style="width: 100%" readonly>
+                    <strong>Вместимость</strong>
+                    <input id="numberOfPlaces" class="text-center" style="width: 100%">
+                    <strong>Категория</strong>
+                    <select class="custom-select text-center" id="GroupSelect">
+                        <option value="0">Люкс</option>
+                        <option value="1">Комфорт</option>
+                        <option value="2">Стандарт</option>
+                    </select>
+                    <strong>Стоимость</strong>
+                    <input id="cost" class="text-center" style="width: 100%">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Update()">Изменить</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>

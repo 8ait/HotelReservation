@@ -165,10 +165,8 @@
     <Compile Include="Common\Logic\HotelContext.cs" />
     <Compile Include="Common\Logic\HotelRepository.cs" />
     <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\DayController.cs" />
     <Compile Include="Controllers\DiscountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PeriodController.cs" />
     <Compile Include="Controllers\Redirector.cs" />
     <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
@@ -226,13 +224,12 @@
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
-    <Content Include="Views\Day\Index.cshtml" />
-    <Content Include="Views\Period\Index.cshtml" />
     <Content Include="Views\Service\LoadPage.cshtml" />
     <Content Include="Views\Service\SearchPage.cshtml" />
     <Content Include="Views\Discount\Index.cshtml" />
     <Content Include="Views\Discount\Days.cshtml" />
     <Content Include="Views\Discount\Periods.cshtml" />
+    <Content Include="Views\Room\GetRooms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

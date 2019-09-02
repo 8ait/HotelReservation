@@ -37,6 +37,11 @@ namespace HotelReservation.Common.Logic
             return db.Durations;
         }
 
+        public IEnumerable<Room> GetRooms()
+        {
+            return db.Rooms;
+        }
+
         public Client GetClient(int id)
         {
             return db.Clients.Find(id);
@@ -57,6 +62,11 @@ namespace HotelReservation.Common.Logic
             return db.Durations.Find(id);
         }
 
+        public Room GetRoom(int id)
+        {
+            return db.Rooms.Find(id);
+        }
+
         public void EditService(Service service)
         {
             db.Entry(service).State = EntityState.Modified;
@@ -66,6 +76,12 @@ namespace HotelReservation.Common.Logic
         public void EditDay(Day day)
         {
             db.Entry(day).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void EditRoom(Room room)
+        {
+            db.Entry(room).State = EntityState.Modified;
             db.SaveChanges();
         }
 

@@ -3,45 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HotelReservation.Common.Interfaces;
+using HotelReservation.Models;
 
 namespace HotelReservation.Controllers
 {
     public class RoomController : Controller
     {
+        private IData _data;
+
+        public RoomController(IData data)
+        {
+            _data = data;
+        }
         // GET: Room
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Discount()
+        public ActionResult GetRooms()
         {
-            return RedirectToAction("Index", "Discount");
+            ViewData["Rooms"] = _data.GetRooms().ToList();
+            return PartialView();
         }
 
-        public ActionResult Service()
+        public ActionResult EditRoom(int id, int numberOfPlaces, int category, int cost)
         {
-            return RedirectToAction("Index", "Service");
-        }
-
-        public ActionResult Reservation()
-        {
-            return RedirectToAction("Index", "Reservation");
-        }
-
-        public ActionResult Client()
-        {
-            return RedirectToAction("Index", "Client");
-        }
-
-        public ActionResult Room()
-        {
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Main()
-        {
-            return RedirectToAction("Main", "Home");
+            Room room = _data.GetRoom(id);
+            room.NumberOfPlaces = numberOfPlaces;
+            room.Category = category;
+            room.Cost = cost;
+            _data.EditRoom(room);
+            return RedirectToAction("GetRooms");
         }
     }
 }

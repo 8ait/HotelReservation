@@ -11,14 +11,17 @@ namespace HotelReservation.Common.Interfaces
     {
         IEnumerable<Day> GetDays();
         IEnumerable<Duration> GetPeriods();
+        IEnumerable<Room> GetRooms();
         Day GetDay(int id);
         Duration GetDuration(int id);
+        Room GetRoom(int id);
         List<Service> GetServicesOnPage(int currentPage, int itemsOnPage);
         List<Service> ContainsService(string name);
         List<Service> GetSearchService(string name);
         void EditDay(Day day);
         void EditService(int id, string name, int cost);
         void EditDuration(Duration duration);
+        void EditRoom(Room room);
         void CreateService(string name, int cost);
         void DeleteService(int id);
         int GetCountOfPages(int itemsOnPage);
