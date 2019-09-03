@@ -38,9 +38,10 @@
                             @Html.TextBox("serviceName", "", new { @class = "form-control", id = "EditModal_serviceName" })
                             <strong>Стоимость услуги</strong>
                             @Html.TextBox("serviceCost", "", new { @class = "form-control", id = "EditModal_serviceCost" })
+                            <span class="badge badge-danger" id="validate_edit">Введите целое значение больше 0</span>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Update()">Изменить</button>
+                            <button class="btn btn-success" id="edit" onclick="ValidateEdit()">Изменить</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
                         </div>
                     </div>
@@ -81,9 +82,10 @@
                             @Html.TextBox("serviceName", "", new { @class = "form-control", id = "CreateModal_serviceName" })
                             <strong>Стоимость услуги</strong>
                             @Html.TextBox("serviceCost", "", new { @class = "form-control", id = "CreateModal_serviceCost" })
+                            <span class="badge badge-danger" id="validate_create">Введите целое значение больше 0</span>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Create()">Создать</button>
+                            <button class="btn btn-success"  id="edit" onclick="ValidateCreate()">Создать</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
                         </div>
                     </div>
@@ -106,9 +108,10 @@
                     <br />
                     <div class="text-center">
                         <input type="text" class="form-control" id="searchName" placeholder="Введите название">
+                        <span class="badge badge-danger" id="validate_search">Название не может быть пустым</span>
                     </div>
                     <br/>
-                    <button class="btn btn-primary" onclick="Search()">Найти &#128270;</button>
+                    <button class="btn btn-primary" onclick="ValidateSearch()">Найти &#128270;</button>
                     <button class="btn btn-danger" onclick="GetStartView()">Сбросить &#128259;</button>
                 </div>
             </div>
@@ -122,6 +125,7 @@
                 window.onload = GetStartView();
 
                 function GetStartView() {
+                    document.getElementById('validate_search').hidden = true;
                     $("#searchName").val(null);
                     $('#services').load("../Service/LoadPage?page=1");
                 }
@@ -155,9 +159,11 @@
                     page_key = currentPage;
                     $("#EditModal_serviceName").val(serviceName);
                     $("#EditModal_serviceCost").val(serviceCost);
+                    document.getElementById('validate_edit').hidden = true;
                     $('#EditModal').modal('show');
                 }
                 function CreateModal() {
+                    document.getElementById('validate_create').hidden = true;
                     $('#CreateModal').modal('show');
                 }
                 function Create() {
@@ -175,6 +181,37 @@
                     serviceIP = serviceIP.replace(/\s*/g, '');
                     $('#services').load(serviceIP);
                 }
+
+                function ValidateCreate() {
+                    var serviceCost = $("#CreateModal_serviceCost").val();
+                    if ((!/^[0-9]+$/.test(serviceCost)) || (serviceCost == 0)) {
+                        document.getElementById('validate_create').hidden = false;
+                    } else {
+                        Create();
+                        $('#CreateModal').modal('hide');
+                    }
+                }
+
+                function ValidateEdit() {
+                    var serviceCost = $("#EditModal_serviceCost").val();
+                    if ((!/^[0-9]+$/.test(serviceCost)) || (serviceCost == 0)) {
+                        document.getElementById('validate_edit').hidden = false;
+                    } else {
+                        Update();
+                        $('#EditModal').modal('hide');
+                    }
+                }
+
+                function ValidateSearch() {
+                    var searchName = $("#searchName").val();
+                    if (searchName.replace(/\s*/g, '') == "") {
+                        document.getElementById('validate_search').hidden = false;
+                    } else {
+                        document.getElementById('validate_search').hidden = true;
+                        Search();
+                    }
+                }
+
                 function Delete() {
                     var serviceID = key;
                     var serviceIP = "../Service/DeleteService?id=" + serviceID + "&page=" + page_key;
