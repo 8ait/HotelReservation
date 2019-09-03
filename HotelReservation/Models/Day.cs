@@ -11,7 +11,6 @@ namespace HotelReservation.Models
         public int DayId { get; set; }
 
         [Display(Name = "Скидка")]
-        [Required]
         public int Discount { get; set; }
     }
 }

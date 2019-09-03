@@ -47,6 +47,7 @@
             */
 
             var key; // глобальная переменная, которая запоминает id нажатого обьекта
+            var trigger; // проверяет была ли уже открыта форма.
 
             window.onload = UpdateDays(); // Сразу добавляем частичное представление дней по загрузке формы
 
@@ -58,6 +59,7 @@
                 key = dayId;
                 var dayDiscount = dataArray[1];
                 $("#EditModalDay_Discount").val(dayDiscount);
+                document.getElementById('validate_day').hidden = true;
                 $('#EditModalDay').modal('show');
             }
 
@@ -69,7 +71,9 @@
                 key = periodId;
                 var periodDiscount = dataArray[1];
                 $("#EditModalPeriod_Discount").val(periodDiscount);
+                document.getElementById('validate_period').hidden = true;
                 $('#EditModalPeriod').modal('show');
+                document.getElementById('text').hidden = true;
             }
 
             // Функция которая отправляет запрос на изменение дня
@@ -103,6 +107,29 @@
                 var daysIP = "../Discount/Days";
                 $('#results').load(daysIP);
             }
+
+            function Validate(id) {
+                if (id == 1) {
+                    var discount = $("#EditModalDay_Discount").val();
+                    if (!/^[0-9]+$/.test(discount)) {
+                        document.getElementById('validate_day').hidden = false;
+                    } else {
+                        EditDay();
+                        $('#EditModalDay').modal('hide');
+                    }
+                } else {
+                    var discount = $("#EditModalPeriod_Discount").val();
+                    if (!/^[0-9]+$/.test(discount)) {
+                        document.getElementById('validate_period').hidden = false;
+                    } else {
+                        EditPeriod();
+                        $('#EditModalPeriod').modal('hide');
+                    }
+                }
+                if (!/^[0-9]+$/.test(discount)) {
+                }
+            }
+            
         </script>
     }
     <!--Модальное окно для редаткирования дня-->
@@ -117,11 +144,11 @@
                 <div class="modal-body text-center">
                     <br />
                     @Html.TextBox("Discount", "", new { @class = "form-control", id = "EditModalDay_Discount" })
-
+                    <span class="badge badge-danger" id="validate_day">Введите целое значение (1-100)</span>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="EditDay()">Изменить</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                    <button class="btn btn-success" id="edit" onclick="Validate(1)">Изменить</button>
+                    <button type="button" class="btn btn-dangerd" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>
@@ -139,10 +166,10 @@
                 <div class="modal-body text-center">
                     <br />
                     @Html.TextBox("Discount", "", new { @class = "form-control", id = "EditModalPeriod_Discount" })
-
+                    <span class="badge badge-danger" id="validate_period">Введите целое значение (1-100)</span>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="EditPeriod()">Изменить</button>
+                    <button class="btn btn-success" id="edit" onclick="Validate(2)">Изменить</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
