@@ -53,7 +53,30 @@
             $("#numberOfPlaces").val(roomNumberOfPlaces);
             $("#cost").val(roomCost);
             document.getElementById("GroupSelect").selectedIndex = roomCategory;
+            document.getElementById("validate_numberOfPlaces").hidden = true;
+            document.getElementById("validate_cost").hidden = true;
             $('#EditModal').modal('show');
+        }
+
+        function Validate() {
+            var flag1 = true;
+            var flag2 = true;
+            var roomNumberOfPlaces = $("#numberOfPlaces").val();
+            var roomCost = $("#cost").val();
+            roomCost = roomCost.replace(/\s*/g, '');
+            roomNumberOfPlaces = roomNumberOfPlaces.replace(/\s*/g, '');
+            if ((!/^[0-9]+$/.test(roomNumberOfPlaces)) || (roomNumberOfPlaces == 0) || (roomNumberOfPlaces > 5)){
+                document.getElementById("validate_numberOfPlaces").hidden = false;
+                flag1 = false;
+            }
+            if ((!/^[0-9]+$/.test(roomCost)) || (roomCost == 0)) {
+                document.getElementById("validate_cost").hidden = false;
+                flag2 = false;
+            }
+            if (flag1 && flag2) {
+                Update();
+                $('#EditModal').modal('hide');
+            }
         }
 
         function Update() {
@@ -79,6 +102,7 @@
                     <input id="numberOfRoom" class="text-center" style="width: 100%" readonly>
                     <strong>Вместимость</strong>
                     <input id="numberOfPlaces" class="text-center" style="width: 100%">
+                    <span class="badge badge-danger" id="validate_numberOfPlaces">Введите целое значение (0-5)</span>
                     <strong>Категория</strong>
                     <select class="custom-select text-center" id="GroupSelect">
                         <option value="0">Люкс</option>
@@ -87,9 +111,10 @@
                     </select>
                     <strong>Стоимость</strong>
                     <input id="cost" class="text-center" style="width: 100%">
+                    <span class="badge badge-danger" id="validate_cost">Введите целое значение больше 0</span>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Update()">Изменить</button>
+                    <button class="btn btn-success" id="edit" onclick="Validate()">Изменить</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
                 </div>
             </div>

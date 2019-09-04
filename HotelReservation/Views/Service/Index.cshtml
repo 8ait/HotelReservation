@@ -36,9 +36,10 @@
                         <div class="modal-body text-center">
                             <strong>Название услуги</strong>
                             @Html.TextBox("serviceName", "", new { @class = "form-control", id = "EditModal_serviceName" })
+                            <span class="badge badge-danger" id="validate_editName">Данное поле не может быть пустым</span>
                             <strong>Стоимость услуги</strong>
                             @Html.TextBox("serviceCost", "", new { @class = "form-control", id = "EditModal_serviceCost" })
-                            <span class="badge badge-danger" id="validate_edit">Введите целое значение больше 0</span>
+                            <span class="badge badge-danger" id="validate_editCost">Введите целое значение больше 0</span>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-success" id="edit" onclick="ValidateEdit()">Изменить</button>
@@ -80,9 +81,10 @@
                         <div class="modal-body text-center">
                             <strong>Название услуги</strong>
                             @Html.TextBox("serviceName", "", new { @class = "form-control", id = "CreateModal_serviceName" })
+                            <span class="badge badge-danger" id="validate_createName">Данное поле не может быть пустым</span>
                             <strong>Стоимость услуги</strong>
                             @Html.TextBox("serviceCost", "", new { @class = "form-control", id = "CreateModal_serviceCost" })
-                            <span class="badge badge-danger" id="validate_create">Введите целое значение больше 0</span>
+                            <span class="badge badge-danger" id="validate_createCost">Введите целое значение больше 0</span>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-success"  id="edit" onclick="ValidateCreate()">Создать</button>
@@ -159,11 +161,13 @@
                     page_key = currentPage;
                     $("#EditModal_serviceName").val(serviceName);
                     $("#EditModal_serviceCost").val(serviceCost);
-                    document.getElementById('validate_edit').hidden = true;
+                    document.getElementById('validate_editCost').hidden = true;
+                    document.getElementById('validate_editName').hidden = true;
                     $('#EditModal').modal('show');
                 }
                 function CreateModal() {
-                    document.getElementById('validate_create').hidden = true;
+                    document.getElementById('validate_createCost').hidden = true;
+                    document.getElementById('validate_createName').hidden = true;
                     $('#CreateModal').modal('show');
                 }
                 function Create() {
@@ -177,6 +181,7 @@
                     var serviceID = key;
                     var serviceName = $("#EditModal_serviceName").val();
                     var serviceCost = $("#EditModal_serviceCost").val();
+                    serviceCost = serviceCost.replace(/\s*/g, '');
                     var serviceIP = "../Service/EditService?id=" + serviceID + "&name=" + serviceName + "&cost=" + serviceCost + "&page=" + page_key;
                     serviceIP = serviceIP.replace(/\s*/g, '');
                     $('#services').load(serviceIP);
@@ -184,9 +189,19 @@
 
                 function ValidateCreate() {
                     var serviceCost = $("#CreateModal_serviceCost").val();
+                    var serviceName = $("#CreateModal_serviceName").val();
+                    var flag1 = true;
+                    var flag2 = true;
+                    serviceCost = serviceCost.replace(/\s*/g, '');
                     if ((!/^[0-9]+$/.test(serviceCost)) || (serviceCost == 0)) {
-                        document.getElementById('validate_create').hidden = false;
-                    } else {
+                        document.getElementById('validate_createCost').hidden = false;
+                        flag1 = false;
+                    }
+                    if (serviceName.replace(/\s*/g, '') == "") {
+                        document.getElementById('validate_createName').hidden = false;
+                        flag2 = false
+                    }
+                    if (flag1 && flag2) {
                         Create();
                         $('#CreateModal').modal('hide');
                     }
@@ -194,9 +209,19 @@
 
                 function ValidateEdit() {
                     var serviceCost = $("#EditModal_serviceCost").val();
+                    var serviceName = $("#EditModal_serviceName").val();
+                    var flag1 = true;
+                    var flag2 = true;
+                    serviceCost = serviceCost.replace(/\s*/g, '');
                     if ((!/^[0-9]+$/.test(serviceCost)) || (serviceCost == 0)) {
-                        document.getElementById('validate_edit').hidden = false;
-                    } else {
+                        document.getElementById('validate_editCost').hidden = false;
+                        flag1 = false;
+                    }
+                    if (serviceName.replace(/\s*/g, '') == "") {
+                        document.getElementById('validate_editName').hidden = false;
+                        flag2 = false
+                    }
+                    if (flag1 && flag2) {
                         Update();
                         $('#EditModal').modal('hide');
                     }
