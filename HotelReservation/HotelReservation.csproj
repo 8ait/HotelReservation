@@ -230,6 +230,7 @@
     <Content Include="Views\Discount\Days.cshtml" />
     <Content Include="Views\Discount\Periods.cshtml" />
     <Content Include="Views\Room\GetRooms.cshtml" />
+    <Content Include="Views\Client\ClienOptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

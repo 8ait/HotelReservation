@@ -22,3 +22,32 @@
     </div>
 </body>
 </html>
+@{
+    ViewData["Title"] = "Клиенты";
+}
+
+<body>
+    <div class="form-group">
+        <label for="ClientName">ФИО клиента</label>
+        <input type="text" class="form-control" id="ClientName">
+    </div>
+    <div class="form-group">
+        <label for="ClientPassportNumber">Номер паспорта клиента</label>
+        <input type="number" class="form-control" id="ClientPassportNumber">
+    </div>
+    <div class="form-group">
+        <label for="ClientBirthDate">Дата рождения клиента</label>
+        <input type="date" class="form-control" id="ClientBirthDate">
+    </div>
+    <div class="form-group">
+        <label for="ClientSex">Пол клиента</label>
+        <select class="form-control" id="ClientSex">
+            <option>Не выбрано</option>
+            <option>Мужской</option>
+            <option>Женский</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-outline-dark">Сохранить изменения</button>
+    </div>
+</body>
