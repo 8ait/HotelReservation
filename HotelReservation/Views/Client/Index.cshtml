@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Главная";
+    ViewData["Title"] = "Клиенты";
 }
 
 <body>
@@ -7,18 +7,64 @@
         <div class="alert alert-info">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
             <div class="text-center">
-                <h5>Документация</h5>
+                <h5>Клиенты</h5>
             </div>
             <div class="row">
                 <p>
-                    Веб-приложение для управления услугами гостиницы. На каждой странице
-                    содержится своя маленькая документация. На главной странице представленна статистика,
-                    описывающая состояние гостиницы.
+                    Клиентов можно добавить, удалить и редактировать. Чтобы найти клиента
+                    можете воспользоваться поиском по фильтру. Каждой брони соответствует один клиент.
                 </p>
             </div>
         </div>
-    <div class="row">
-            
+    <div class="jumbotron" style="background-color: #F0E68C">
+        <div class="text-center">
+            <h5><strong>Поиск по фильтру</strong></h5>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <div class="jumbotron"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="jumbotron">
+                    <div class="text-center">
+                        <h6>Пол</h6>
+                        <br />
+                        <div class="text-center">
+                            <div class="btn-group btn-block btn-group-lg justify-content-center">
+                                <button class="btn btn-outline-success">&#129333;</button>
+                                <button class="btn btn-outline-success">&#128590;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="jumbotron">
+                    <div class="text-center">
+                        <h6>Дата рождения</h6>
+                        <br />
+                        <div class="text-center">
+                            <input type="date" class="form-control text-center" id="searchSerialOfPassport" placeholder="1234 567890">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="jumbotron">
+                    <div class="text-center">
+                        <h6>Паспортные данные</h6>
+                        <br />
+                        <div class="text-center">
+                            <input type="text" class="form-control text-center" id="searchSerialOfPassport" placeholder="1234 567890">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row jumbotron">
+
     </div>
     </div>
 </body>
