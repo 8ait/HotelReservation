@@ -30,6 +30,12 @@ namespace HotelReservation.Controllers
             return PartialView();
         }
 
+        public JsonResult ValidateSerial(int serial)
+        {
+            string error = "false";
+            return Json(error);
+        }
+
         public ActionResult CreateClient(string firstName, string secondName, long serial, int sex, string dateOfBorn)
         {
             _data.CreateClient(firstName, secondName, serial, sex, dateOfBorn);

@@ -62,16 +62,16 @@
                 <div class="modal-body text-center">
                     <strong>Имя</strong>
                     <input type="text" class="form-control" id="ClientFirstName">
-                    <span class="badge badge-danger" id="validate_createName">Данное поле не может быть пустым</span>
+                    <span class="badge badge-danger" id="validate_createFirstName">Данное поле не может быть пустым</span>
                     <strong>Фамилия</strong>
                     <input type="text" class="form-control" id="ClientSecondName">
                     <div class="text-center">
-                        <span class="badge badge-danger" id="validate_createCost">Данное поле не может быть пустым</span>
+                        <span class="badge badge-danger" id="validate_createSecondName">Данное поле не может быть пустым</span>
                     </div>
                     <strong>Дата рождения</strong>
                     <input type="date" class="form-control" id="ClientDate">
                     <div class="text-center">
-                        <span class="badge badge-danger" id="validate_createCost">Данное поле не может быть пустым</span>
+                        <span class="badge badge-danger" id="validate_createDate">Данное поле не может быть пустым</span>
                     </div>
                     <strong>Пол</strong>
                     <div class="btn-group btn-block btn-group-lg justify-content-center">
@@ -79,15 +79,15 @@
                         <button type="button" class="btn btn-outline-success"id="Female" onclick="Female()">&#129335;</button>
                     </div>
                     <div class="text-center">
-                        <span class="badge badge-danger" id="validate_createCost">Выберите пол</span>
+                        <span class="badge badge-danger" id="validate_createSex">Выберите пол</span>
                     </div>
                     <strong>Паспортные данные</strong>
                     <input type="text" class="form-control" id="ClientSerial">
-                    <span class="badge badge-danger" id="validate_createCost">Данное поле не может быть пустым</span>
+                    <span class="badge badge-danger" id="validate_createSerial">Неверный формат ввода</span>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" id="edit" onclick="Create()">Создать</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                    <button class="btn btn-success" id="edit" onclick="ValidateCreate()">Создать</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="CreateClear()">Отмена</button>
                 </div>
             </div>
         </div>
@@ -115,12 +115,70 @@
         }
 
         function ShowCreate() {
+            CreateHide();
             $('#CreateModal').modal('show');
+        }
+
+        function CreateClear() {
+            $('#ClientFirstName').val(null);
+            $('#ClientSecondName').val(null);
+            $('#ClientDate').val(null);
+            $('#ClientSerial').val(null);
+            document.getElementById("Male").className = "btn btn-outline-success";
+            document.getElementById("Female").className = "btn btn-outline-success";
+            sex = -1;
+        }
+
+        function CreateHide() {
+            document.getElementById('validate_createFirstName').hidden = true;
+            document.getElementById('validate_createSecondName').hidden = true;
+            document.getElementById('validate_createDate').hidden = true;
+            document.getElementById('validate_createSex').hidden = true;
+            document.getElementById('validate_createSerial').hidden = true;
         }
 
         function GetPage() {
             var name = $('#f1').val();
             $('#clients').load("../Client/LoadPage?page=" + name);
+        }
+
+        function ValidateCreate() {
+            CreateHide();
+            var firstName = $('#ClientFirstName').val();
+            var secondName = $('#ClientSecondName').val();
+            var dateOfBorn = $('#ClientDate').val();
+            var clientSerial = $('#ClientSerial').val();
+            var flag1 = true;
+            var flag2 = true;
+            var flag3 = true;
+            var flag4 = true;
+            var flag5 = true;
+            if (firstName.replace(/\s*/g, '') == "") {
+                flag1 = false;
+                document.getElementById('validate_createFirstName').hidden = false;
+            }
+            if (secondName.replace(/\s*/g, '') == "") {
+                flag2 = false;
+                document.getElementById('validate_createSecondName').hidden = false;
+            }
+            if (dateOfBorn.replace(/\s*/g, '') == "") {
+                flag3 = false;
+                document.getElementById('validate_createDate').hidden = false;
+            }
+            if (sex != 0 && sex != 1) {
+                flag4 = false;
+                document.getElementById('validate_createSex').hidden = false;
+            }
+            if (clientSerial.replace(/\s*/g, '').length != 10 || (!/^[0-9]+$/.test(clientSerial))) {
+                flag5 = false;
+                document.getElementById('validate_createSerial').hidden = false;
+            }
+            if (flag1 && flag2 && flag3 && flag4 && flag5) {
+                var answer = $.getJSON("../Client/ValidateSerial?=1234567891");
+                alert(answer);
+                Create();
+                $('#CreateModal').modal('hide');
+            }
         }
 
         function Create() {
@@ -131,7 +189,6 @@
             var clientIP = "../Client/CreateClient?firstName=" + firstName + "&secondName=" + secondName + "&serial=" + clientSerial + "&sex=" + sex + "&dateOfBorn=" + dateOfBorn;
             clientIP = clientIP.replace(/\s*/g, '');
             $('#clients').load(clientIP);
-            $('#CreateModal').modal('hide');
         }
 
     </script>
