@@ -107,6 +107,12 @@ namespace HotelReservation.Common.Logic
             db.SaveChanges();
         }
 
+        public void CreateClient(Client client)
+        {
+            db.Clients.Add(client);
+            db.SaveChanges();
+        }
+
         public IEnumerable<Service> GetServices()
         {
             return db.Services;

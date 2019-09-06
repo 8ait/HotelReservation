@@ -29,5 +29,11 @@ namespace HotelReservation.Controllers
             ViewData["Pages"] = _data.GetCountOfPagesClient(_itemsOnPage);
             return PartialView();
         }
+
+        public ActionResult CreateClient(string firstName, string secondName, long serial, int sex, string dateOfBorn)
+        {
+            _data.CreateClient(firstName, secondName, serial, sex, dateOfBorn);
+            return RedirectToAction("LoadPage", new { page = _data.GetCountOfPagesClient(_itemsOnPage) });
+        }
     }
 }

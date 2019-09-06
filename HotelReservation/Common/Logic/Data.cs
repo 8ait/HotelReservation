@@ -179,6 +179,18 @@ namespace HotelReservation.Common.Logic
             _repository.CreateService(service);
         }
 
+        public void CreateClient(string firstName, string secondName, long serial, int sex, string date)
+        {
+            Client client = new Client();
+            client.FirstName = firstName;
+            client.SecondName = secondName;
+            client.SerialOfPassport = serial;
+            client.Sex = Convert.ToBoolean(sex);
+            DateTime dateOfBorn = DateTime.Parse(date);
+            client.DateOfBorn = dateOfBorn;
+            _repository.CreateClient(client);
+        }
+
         public void DeleteService(int id)
         {
             _repository.DeleteService(id);

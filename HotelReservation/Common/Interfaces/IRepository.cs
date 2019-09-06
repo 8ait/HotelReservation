@@ -28,6 +28,7 @@ namespace HotelReservation.Common.Interfaces
         void EditRoom(Room room);
         void DeleteService(int id);
         void CreateService(Service service);
+        void CreateClient(Client client);
 
     }
 }
