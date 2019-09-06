@@ -208,6 +208,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Web.config" />
@@ -231,6 +233,7 @@
     <Content Include="Views\Discount\Periods.cshtml" />
     <Content Include="Views\Room\GetRooms.cshtml" />
     <Content Include="Views\Client\ClienOptions.cshtml" />
+    <Content Include="Views\Client\LoadPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

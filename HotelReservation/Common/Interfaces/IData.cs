@@ -16,6 +16,7 @@ namespace HotelReservation.Common.Interfaces
         Duration GetDuration(int id);
         Room GetRoom(int id);
         List<Service> GetServicesOnPage(int currentPage, int itemsOnPage);
+        List<Client> GetClientsOnPage(int currentPage, int itemsOnPage);
         List<Service> ContainsService(string name);
         List<Service> GetSearchService(string name);
         void EditDay(Day day);
@@ -26,5 +27,7 @@ namespace HotelReservation.Common.Interfaces
         void DeleteService(int id);
         int GetCountOfPages(int itemsOnPage);
         int GetValidatePage(int page, int itemsOnPage);
+        int GetValidatePageClient(int page, int itemsOnPage);
+        int GetCountOfPagesClient(int itemsOnPage);
     }
 }

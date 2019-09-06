@@ -8,7 +8,7 @@ namespace HotelReservation.Models
     public class Client
     {
         public int ClientID { get; set; }
-        public int SerialOfPassport { get; set; }
+        public long SerialOfPassport { get; set; }
         public DateTime DateOfBorn {get; set;}
         public bool Sex { get; set; }
         public string FirstName { get; set; }

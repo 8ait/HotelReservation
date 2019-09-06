@@ -1,0 +1,98 @@
+﻿@using HotelReservation.Models;
+@{
+    Layout = null;
+}
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <table class="table table-striped table-responsive-sm table-responsive-xl table-bordered table-responsive-md">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <div class="text-center">
+                        <h6>Фамилия</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Имя</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Пол</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Дата рождения</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <button class="btn btn-success" onclick="ShowCreate()">
+                            Создать&#10133;
+                        </button>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Client item in (List<Client>)ViewData["Clients"])
+            {
+                <tr>
+                    <td class="table-info">
+                        <div class="text-center">
+                            <strong>@item.SecondName</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.FirstName</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            @if (item.Sex)
+                            {
+                                <strong>&#129333;</strong>
+                            }
+                            else
+                            {
+                                <strong>&#129335;</strong>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.DateOfBorn.ToString("dd/MM/yyyy")</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-block">
+                            <button class="btn btn-info" id="" onclick="ShowModal()">
+                                &#9999;
+                            </button>
+                            <button class="btn btn-danger" onclick="DeleteModal()">
+                                &#128465;
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <div class="text-center">
+        <strong>Страница</strong>
+        <input class="text-center" id="f1" type="number" min="1" max="@ViewData["Pages"]" style="width: 8%" value="@ViewData["CurrentPage"]" />
+        <strong>из @ViewData["Pages"]</strong>
+    </div>
+    <br />
+    <div class="text-center">
+        <button class="btn btn-warning" onclick="GetPage()"><strong>Перейти</strong>&#128640;</button>
+    </div>
+</body>
+

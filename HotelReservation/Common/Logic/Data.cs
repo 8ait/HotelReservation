@@ -59,6 +59,49 @@ namespace HotelReservation.Common.Logic
             _repository.EditRoom(room);
         }
 
+        public List<Client> GetClientsOnPage(int currentPage, int itemsOnPage)
+        {
+            List<Client> clientsOnPage = new List<Client>();
+            List<Client> clients = _repository.GetClients().ToList();
+            currentPage = GetValidatePageClient(currentPage, itemsOnPage);
+            int start = currentPage * itemsOnPage - (itemsOnPage - 1);
+            int end = currentPage * itemsOnPage;
+            if (end > clients.Count)
+            {
+                end = clients.Count;
+            }
+            for (int i = start - 1; i < end; i++)
+            {
+                clientsOnPage.Add(clients[i]);
+            }
+            return clientsOnPage;
+        }
+
+        public int GetValidatePageClient(int page, int itemsOnPage)
+        {
+            if (page > GetCountOfPagesClient(itemsOnPage))
+            {
+                page = GetCountOfPagesClient(itemsOnPage);
+            }
+            else if (page <= 0)
+            {
+                page = 1;
+            }
+            return page;
+        }
+
+        public int GetCountOfPagesClient(int itemsOnPage)
+        {
+            if (_repository.GetClients().Count() % itemsOnPage == 0)
+            {
+                return _repository.GetClients().Count() / itemsOnPage;
+            }
+            else
+            {
+                return _repository.GetClients().Count() / itemsOnPage + 1;
+            }
+        }
+
         public List<Service> GetServicesOnPage(int currentPage, int itemsOnPage)
         {
             List<Service> servicesOnPage = new List<Service>();

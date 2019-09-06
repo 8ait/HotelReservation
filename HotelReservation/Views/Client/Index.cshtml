@@ -1,8 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Клиенты";
 }
-
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="jquery.maskedinput.min.js"></script>
 <body>
+
     <div class="container">
         <div class="alert alert-info">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -16,55 +21,93 @@
                 </p>
             </div>
         </div>
-    <div class="jumbotron" style="background-color: #F0E68C">
-        <div class="text-center">
-            <h5><strong>Поиск по фильтру</strong></h5>
-        </div>
-        <br />
         <div class="row">
-            <div class="col-md-3">
-                <div class="jumbotron"></div>
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-9">
                 <div class="jumbotron">
-                    <div class="text-center">
-                        <h6>Пол</h6>
-                        <br />
-                        <div class="text-center">
-                            <div class="btn-group btn-block btn-group-lg justify-content-center">
-                                <button class="btn btn-outline-success">&#129333;</button>
-                                <button class="btn btn-outline-success">&#128590;</button>
-                            </div>
-                        </div>
+                    <div id="clients">
+
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="jumbotron">
+                <div class="jumbotron" style="background-color: #F0E68C">
                     <div class="text-center">
-                        <h6>Дата рождения</h6>
-                        <br />
-                        <div class="text-center">
-                            <input type="date" class="form-control text-center" id="searchSerialOfPassport" placeholder="1234 567890">
-                        </div>
+                        <h5>Поиск</h5>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="jumbotron">
+                    <br />
                     <div class="text-center">
-                        <h6>Паспортные данные</h6>
-                        <br />
-                        <div class="text-center">
-                            <input type="text" class="form-control text-center" id="searchSerialOfPassport" placeholder="1234 567890">
-                        </div>
+                        <input type="text" class="form-control" id="serial" placeholder="Паспортные данные">
+                        <span class="badge badge-danger" id="validate_search">Неверный формат</span>
+                    </div>
+                    <br />
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="ValidateSearch()">Найти &#128270;</button>
+                    </div>                   
+                    <br />
+                    <div class="text-center">
+                        <button class="btn btn-danger" onclick="GetStartView()">Сбросить &#128259;</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row jumbotron">
+    <div class="modal fade" id="CreateModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-center">
+                        <h5><strong>Создать клиента &#9989;</strong></h5>
+                    </div>
+                </div>
+                <div class="modal-body text-center">
+                    <strong>Имя</strong>
+                    <input type="text" class="form-control" id="ClientFirstName">
+                    <span class="badge badge-danger" id="validate_createName">Данное поле не может быть пустым</span>
+                    <strong>Фамилия</strong>
+                    <input type="text" class="form-control" id="ClientSecondName">
+                    <div class="text-center">
+                        <span class="badge badge-danger" id="validate_createCost">Данное поле не может быть пустым</span>
+                    </div>
+                    <strong>Дата рождения</strong>
+                    <input type="date" class="form-control" id="ClientDate">
+                    <div class="text-center">
+                        <span class="badge badge-danger" id="validate_createCost">Данное поле не может быть пустым</span>
+                    </div>
+                    <strong>Пол</strong>
+                    <div class="btn-group btn-block btn-group-lg justify-content-center">
+                        <button type="button" class="btn btn-outline-success">&#129333;</button>
+                        <button type="button" class="btn btn-outline-success">&#129335;</button>
+                    </div>
+                    <div class="text-center">
+                        <span class="badge badge-danger" id="validate_createCost">Выберите пол</span>
+                    </div>
+                    <strong>Паспортные данные</strong>
+                    <input type="text" class="form-control" id="ClientDate">
+                    <span class="badge badge-danger" id="validate_createCost">Данное поле не может быть пустым</span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="edit" onclick="ValidateCreate()">Создать</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <script>
+        window.onload = UpdateClients();
 
-    </div>
-    </div>
+        function UpdateClients() {
+            var ClientIP = "../Client/LoadPage?page=1";
+            $('#clients').load(ClientIP);
+        }
+
+        function ShowCreate() {
+            $('#CreateModal').modal('show');
+        }
+
+        function GetPage() {
+            var name = $('#f1').val();
+            $('#clients').load("../Client/LoadPage?page=" + name);
+        }
+
+    </script>
 </body>
