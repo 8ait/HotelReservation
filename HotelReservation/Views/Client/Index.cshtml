@@ -5,7 +5,7 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<script src="jquery.maskedinput.min.js"></script>
+<script src="~/Scripts/jquery.maskedinput.min.js"></script>
 <body>
 
     <div class="container">
@@ -17,7 +17,7 @@
             <div class="row">
                 <p>
                     Клиентов можно добавить, удалить и редактировать. Чтобы найти клиента
-                    можете воспользоваться поиском по фильтру. Каждой брони соответствует один клиент.
+                    можете воспользоваться поиском по паспортным данным.
                 </p>
             </div>
         </div>
@@ -91,7 +91,33 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+    <div class="modal fade" id="DeleteModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-center">
+                        <h5><strong>Удалить клиента &#128465;</strong></h5>
+                    </div>
+                </div>
+                <div class="modal-body text-center">
+                    <strong>Удалить клиента?</strong>
+                    <div class="text-center">
+                        <br />
+                        <input id="FirstOfClient" class="form-control text-center" style="width: 100%" readonly>
+                        <br />
+                        <input id="SecondOfClient" class="form-control text-center" style="width: 100%" readonly>
+                        <br />
+                        <input id="Serial" class="form-control text-center" style="width: 100%" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" id="edit" onclick="Delete()">Удалить</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         window.onload = UpdateClients();
 
@@ -117,6 +143,29 @@
         function ShowCreate() {
             CreateHide();
             $('#CreateModal').modal('show');
+        }
+
+        var page_key;
+        var key;
+        function DeleteModal(clientID, currentPage) {
+            var dataStr = $("#" + clientID).val();
+            var dataArray = dataStr.split("|");
+            var clientFirstName = dataArray[0];
+            var clientSecondName = dataArray[1];
+            var clientSerial = dataArray[2];
+            page_key = currentPage;
+            key = clientID;
+            $("#FirstOfClient").val(clientFirstName);
+            $("#SecondOfClient").val(clientSecondName);
+            $("#Serial").val(clientSerial);
+            $('#DeleteModal').modal('show');
+        }
+
+        function Delete() {
+            var clientID = key;
+            var clientIP = "../Client/DeleteClient?id=" + clientID + "&page=" + page_key;
+            clientIP = clientIP.replace(/\s*/g, '');
+            $('#clients').load(clientIP);
         }
 
         function CreateClear() {
@@ -174,8 +223,6 @@
                 document.getElementById('validate_createSerial').hidden = false;
             }
             if (flag1 && flag2 && flag3 && flag4 && flag5) {
-                var answer = $.getJSON("../Client/ValidateSerial?=1234567891");
-                alert(answer);
                 Create();
                 $('#CreateModal').modal('hide');
             }

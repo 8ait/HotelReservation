@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HotelReservation.Common.Interfaces;
+using Newtonsoft.Json;
 
 namespace HotelReservation.Controllers
 {
@@ -30,11 +31,23 @@ namespace HotelReservation.Controllers
             return PartialView();
         }
 
-        public JsonResult ValidateSerial(int serial)
+        public ActionResult DeleteClient(int id, int page)
         {
-            string error = "false";
-            return Json(error);
+            _data.DeleteClient(id);
+            return RedirectToAction("LoadPage", new { page = page });
         }
+
+        /*public JsonResult ValidateSerial(int serial)
+        {
+            var answer = new JsonHelper() {
+                Id = "404",
+                Code = "error"
+            };
+
+            var jsonAnswer = JsonConvert.SerializeObject(answer);
+
+            return jsonAnswer;
+        } */
 
         public ActionResult CreateClient(string firstName, string secondName, long serial, int sex, string dateOfBorn)
         {

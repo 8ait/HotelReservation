@@ -196,6 +196,11 @@ namespace HotelReservation.Common.Logic
             _repository.DeleteService(id);
         }
 
+        public void DeleteClient(int id)
+        {
+            _repository.DeleteClient(id);
+        }
+
         public void EditService(int id, string name, int cost)
         {
             Service service = _repository.GetService(id);

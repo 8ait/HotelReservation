@@ -26,6 +26,7 @@ namespace HotelReservation.Common.Interfaces
         void CreateService(string name, int cost);
         void CreateClient(string firstName, string secondName, long serial, int sex, string dateOfBorn);
         void DeleteService(int id);
+        void DeleteClient(int id);
         int GetCountOfPages(int itemsOnPage);
         int GetValidatePage(int page, int itemsOnPage);
         int GetValidatePageClient(int page, int itemsOnPage);

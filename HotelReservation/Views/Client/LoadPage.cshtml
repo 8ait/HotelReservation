@@ -75,7 +75,7 @@
                             <button class="btn btn-info" id="" onclick="ShowModal()">
                                 &#9999;
                             </button>
-                            <button class="btn btn-danger" onclick="DeleteModal()">
+                            <button class="btn btn-danger" value="@item.FirstName |@item.SecondName |@item.SerialOfPassport" id="@item.ClientID" onclick="DeleteModal(@item.ClientID, @ViewData["CurrentPage"])">
                                 &#128465;
                             </button>
                         </div>

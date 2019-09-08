@@ -101,6 +101,16 @@ namespace HotelReservation.Common.Logic
             }
         }
 
+        public void DeleteClient(int id)
+        {
+            Client client = db.Clients.Find(id);
+            if (client != null)
+            {
+                db.Clients.Remove(client);
+                db.SaveChanges();
+            }
+        }
+
         public void CreateService(Service service)
         {
             db.Services.Add(service);
