@@ -118,6 +118,47 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="EditModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="text-center">
+                        <h5><strong>Создать клиента &#9989;</strong></h5>
+                    </div>
+                </div>
+                <div class="modal-body text-center">
+                    <strong>Имя</strong>
+                    <input type="text" class="form-control" id="ClientFirstNameEdit">
+                    <span class="badge badge-danger" id="validate_editFirstName">Данное поле не может быть пустым</span>
+                    <strong>Фамилия</strong>
+                    <input type="text" class="form-control" id="ClientSecondNameEdit">
+                    <div class="text-center">
+                        <span class="badge badge-danger" id="validate_editSecondName">Данное поле не может быть пустым</span>
+                    </div>
+                    <strong>Дата рождения</strong>
+                    <input type="date" class="form-control" id="ClientDateEdit">
+                    <div class="text-center">
+                        <span class="badge badge-danger" id="validate_editDate">Данное поле не может быть пустым</span>
+                    </div>
+                    <strong>Пол</strong>
+                    <div class="btn-group btn-block btn-group-lg justify-content-center">
+                        <button type="button" class="btn btn-outline-success" id="MaleEdit" onclick="MaleEdit()">&#129333;</button>
+                        <button type="button" class="btn btn-outline-success" id="FemaleEdit" onclick="FemaleEdit()">&#129335;</button>
+                    </div>
+                    <div class="text-center">
+                        <span class="badge badge-danger" id="validate_editSex">Выберите пол</span>
+                    </div>
+                    <strong>Паспортные данные</strong>
+                    <input type="text" class="form-control" id="ClientSerialEdit">
+                    <span class="badge badge-danger" id="validate_editSerial">Неверный формат ввода</span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" id="edit" onclick="ValidateEdit()">Создать</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         window.onload = UpdateClients();
 
@@ -135,6 +176,18 @@
             document.getElementById("Male").className = "btn btn-outline-success";
         }
 
+        function FemaleEdit() {
+            sex = 0;
+            document.getElementById("FemaleEdit").className = "btn btn-outline-success active";
+            document.getElementById("MaleEdit").className = "btn btn-outline-success";
+        }
+
+        function MaleEdit() {
+            sex = 1;
+            document.getElementById("MaleEdit").className = "btn btn-outline-success active";
+            document.getElementById("FemaleEdit").className = "btn btn-outline-success";
+        }
+
         function UpdateClients() {
             var ClientIP = "../Client/LoadPage?page=1";
             $('#clients').load(ClientIP);
@@ -147,6 +200,7 @@
 
         var page_key;
         var key;
+
         function DeleteModal(clientID, currentPage) {
             var dataStr = $("#" + clientID).val();
             var dataArray = dataStr.split("|");
@@ -159,6 +213,43 @@
             $("#SecondOfClient").val(clientSecondName);
             $("#Serial").val(clientSerial);
             $('#DeleteModal').modal('show');
+        }
+
+        function EditModal(clientID, currentPage) {
+            var dataStr = $("#" + clientID).val();
+            var dataArray = dataStr.split("|");
+            var firstName = dataArray[0];
+            var secondName = dataArray[1];
+            var date = dataArray[2];
+            var sex = dataArray[3];
+            var serial = dataArray[4];
+            key = clientID;
+            page_key = currentPage;
+            $("#ClientFirstNameEdit").val(firstName);
+            $("#ClientSecondNameEdit").пшеval(secondName);
+            if (sex) {
+                MaleEdit();
+            } else {
+                FemaleEdit();
+            }
+            $("#ClientDateEdit").val(date);
+            $("#ClientSerialEdit").val(serial);
+            document.getElementById('validate_editFirstName').hidden = true;
+            document.getElementById('validate_editSecondName').hidden = true;
+            document.getElementById('validate_editDate').hidden = true;
+            document.getElementById('validate_editSex').hidden = true;
+            document.getElementById('validate_editSerial').hidden = true;
+            $('#EditModal').modal('show');
+        }
+
+        function Edit() {
+            var serviceID = key;
+            var serviceName = $("#EditModal_serviceName").val();
+            var serviceCost = $("#EditModal_serviceCost").val();
+            serviceCost = serviceCost.replace(/\s*/g, '');
+            var serviceIP = "../Service/EditService?id=" + serviceID + "&name=" + serviceName + "&cost=" + serviceCost + "&page=" + page_key;
+            serviceIP = serviceIP.replace(/\s*/g, '');
+            $('#services').load(serviceIP);
         }
 
         function Delete() {
