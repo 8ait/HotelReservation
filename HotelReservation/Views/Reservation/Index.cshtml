@@ -1,40 +1,45 @@
 ﻿@{
-    ViewData["Title"] = "Бронирования";
+    ViewData["Title"] = "Брони";
 }
 
 <body>
-    <h1>Введите/измените информацию о бронировании</h1>
-    <div class="form-group">
-        <label for="ReservationNumber">Номер брони</label>
-        <input type="number" class="form-control" id="ReservationNumber" placeholder="Здесь будет номер брони динамически" readonly>
-    </div>
-    <div class="form-group">
-        <label for="ReservationStatus">Статус бронирования</label>
-        <select class="form-control" id="ReservationStatus">
-            <option>Не выбрано</option>
-            <option>Свободен</option>
-            <option>Занят</option>
-            <option>Забронирован</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="ClientCode">Код клиента</label>
-        <input type="number" class="form-control" id="ClientCode">
-    </div>
-    <div class="form-group">
-        <label for="RoomCode">Код номера</label>
-        <input type="number" class="form-control" id="RoomCode">
-    </div>
-    <div class="form-group">
-        <label for="CheckInDay">День заезда</label>
-        <input type="date" class="form-control" id="CheckInDay">
-    </div>
-    <div class="form-group">
-        <label for="CheckOutDay">День выезда</label>
-        <input type="date" class="form-control" id="CheckOutDay">
-    </div>
-    <div class="form-group">
-        <label for="Cost">Общая цена</label>
-        <input type="number" class="form-control" id="Cost" placeholder="Подсчитывается динамически" readonly>
+    <div class="container">
+        <div class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <div class="text-center">
+                <h5>Брони</h5>
+            </div>
+            <div class="row">
+                <p>
+                    Брони можно создать или отменить. Расчет стоимости брони осуществляется в 
+                    соответствии с правилами отеля, учитывая скидки по дням и периодам, а также стоимость услуг.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="jumbotron">
+                    <div class="text-center">
+                        <div class="btn-group btn-block btn-group-lg justify-content-center">
+
+                            <button type="button" class="btn btn-outline-info navbar-btn" onclick="">В ожидании</button>
+                            <button type="button" class="btn btn-outline-success navbar-btn active" onclick="">Активные</button>
+                            <button type="button" class="btn btn-outline-danger navbar-btn" onclick="">Отмененные</button>
+
+                        </div>
+                    </div>
+                    <div id="reservations">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="jumbotron" style="background-color: #F0E68C">
+                    <div class="text-center">
+                        <h5>Поиск</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>

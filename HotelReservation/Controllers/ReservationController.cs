@@ -3,45 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HotelReservation.Common.Interfaces;
 
 namespace HotelReservation.Controllers
 {
     public class ReservationController : Controller
     {
+        IData _data;
+
+        public ReservationController(IData data)
+        {
+            _data = data;
+        }
         // GET: Reservation
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Discount()
+        public ActionResult LoadPage(int page)
         {
-            return RedirectToAction("Index", "Discount");
+            return PartialView();
         }
-
-        public ActionResult Service()
-        {
-            return RedirectToAction("Index", "Service");
-        }
-
-        public ActionResult Reservation()
-        {
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Client()
-        {
-            return RedirectToAction("Index", "Client");
-        }
-
-        public ActionResult Room()
-        {
-            return RedirectToAction("Index", "Room");
-        }
-
-        public ActionResult Main()
-        {
-            return RedirectToAction("Main", "Home");
-        }
+       
     }
 }
