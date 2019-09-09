@@ -23,6 +23,7 @@ namespace HotelReservation.Common.Interfaces
         Service GetService(int id);
         Room GetRoom(int id);
         void EditDay(Day day);
+        void EditClient(Client client);
         void EditDuration(Duration duration);
         void EditService(Service service);
         void EditRoom(Room room);

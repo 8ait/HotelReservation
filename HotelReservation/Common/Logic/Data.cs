@@ -209,6 +209,17 @@ namespace HotelReservation.Common.Logic
             _repository.EditService(service);
         }
 
+        public void EditClient(int id, string firstName, string secondName, long serial, int sex, string dateOfBorn)
+        {
+            Client client = _repository.GetClient(id);
+            client.FirstName = firstName;
+            client.SecondName = secondName;
+            client.SerialOfPassport = serial;
+            client.Sex = Convert.ToBoolean(sex);
+            client.DateOfBorn = DateTime.Parse(dateOfBorn);
+            _repository.EditClient(client);
+        }
+
         public void EditDuration(Duration duration)
         {
             _repository.EditDuration(duration);

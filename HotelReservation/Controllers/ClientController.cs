@@ -54,5 +54,12 @@ namespace HotelReservation.Controllers
             _data.CreateClient(firstName, secondName, serial, sex, dateOfBorn);
             return RedirectToAction("LoadPage", new { page = _data.GetCountOfPagesClient(_itemsOnPage) });
         }
+
+        [HttpGet]
+        public ActionResult EditClient(int id, string firstName, string secondName, long serial, int sex, string dateOfBorn, int page)
+        {
+            _data.EditClient(id, firstName, secondName, serial, sex, dateOfBorn);
+            return RedirectToAction("LoadPage", new { page = page });
+        }
     }
 }

@@ -72,7 +72,7 @@
                     </td>
                     <td>
                         <div class="btn-group btn-block">
-                            <button class="btn btn-info" value="@item.FirstName |@item.SecondName |@item.DateOfBorn |@item.Sex |@item.SerialOfPassport" id="@item.ClientID" onclick="EditModal(@item.ClientID, @ViewData["CurrentPage"])">
+                            <button class="btn btn-info" value="@item.FirstName |@item.SecondName |@item.DateOfBorn.AddMinutes(1).ToString("yyyy-MM-dd") |@Convert.ToInt32(item.Sex) |@item.SerialOfPassport" id="@item.ClientID" onclick="EditModal(@item.ClientID, @ViewData["CurrentPage"])">
                                 &#9999;
                             </button>
                             <button class="btn btn-danger" value="@item.FirstName |@item.SecondName |@item.SerialOfPassport" id="@item.ClientID" onclick="DeleteModal(@item.ClientID, @ViewData["CurrentPage"])">

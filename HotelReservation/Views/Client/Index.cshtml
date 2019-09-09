@@ -153,7 +153,7 @@
                     <span class="badge badge-danger" id="validate_editSerial">Неверный формат ввода</span>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" id="edit" onclick="ValidateEdit()">Создать</button>
+                    <button class="btn btn-success" id="edit" onclick="ValidateEdit()">Изменить</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
@@ -206,7 +206,7 @@
             var dataArray = dataStr.split("|");
             var clientFirstName = dataArray[0];
             var clientSecondName = dataArray[1];
-            var clientSerial = dataArray[2];
+            var clientSerial = dataArray[4];
             page_key = currentPage;
             key = clientID;
             $("#FirstOfClient").val(clientFirstName);
@@ -220,19 +220,20 @@
             var dataArray = dataStr.split("|");
             var firstName = dataArray[0];
             var secondName = dataArray[1];
-            var date = dataArray[2];
+            var date = new Date(dataArray[2]);
+            date.setDate(date.getDate() + 1);
             var sex = dataArray[3];
             var serial = dataArray[4];
             key = clientID;
             page_key = currentPage;
             $("#ClientFirstNameEdit").val(firstName);
-            $("#ClientSecondNameEdit").пшеval(secondName);
-            if (sex) {
+            $("#ClientSecondNameEdit").val(secondName);
+            if (sex == 1) {
                 MaleEdit();
-            } else {
+            } else if (sex == 0) {
                 FemaleEdit();
             }
-            $("#ClientDateEdit").val(date);
+            document.getElementById('ClientDateEdit').valueAsDate = date;
             $("#ClientSerialEdit").val(serial);
             document.getElementById('validate_editFirstName').hidden = true;
             document.getElementById('validate_editSecondName').hidden = true;
@@ -242,14 +243,53 @@
             $('#EditModal').modal('show');
         }
 
+        function ValidateEdit() {
+            EditHide();
+            var firstName = $('#ClientFirstNameEdit').val();
+            var secondName = $('#ClientSecondNameEdit').val();
+            var dateOfBorn = $('#ClientDateEdit').val();
+            var clientSerial = $('#ClientSerialEdit').val();
+            var flag1 = true;
+            var flag2 = true;
+            var flag3 = true;
+            var flag4 = true;
+            var flag5 = true;
+            if (firstName.replace(/\s*/g, '') == "") {
+                flag1 = false;
+                document.getElementById('validate_editFirstName').hidden = false;
+            }
+            if (secondName.replace(/\s*/g, '') == "") {
+                flag2 = false;
+                document.getElementById('validate_editSecondName').hidden = false;
+            }
+            if (dateOfBorn.replace(/\s*/g, '') == "") {
+                flag3 = false;
+                document.getElementById('validate_editDate').hidden = false;
+            }
+            if (sex != 0 && sex != 1) {
+                flag4 = false;
+                document.getElementById('validate_editSex').hidden = false;
+            }
+            if (clientSerial.replace(/\s*/g, '').length != 10 || (!/^[0-9]+$/.test(clientSerial))) {
+                flag5 = false;
+                document.getElementById('validate_editSerial').hidden = false;
+            }
+            if (flag1 && flag2 && flag3 && flag4 && flag5) {
+                Edit();
+                $('#EditModal').modal('hide');
+            }
+        }
+
         function Edit() {
-            var serviceID = key;
-            var serviceName = $("#EditModal_serviceName").val();
-            var serviceCost = $("#EditModal_serviceCost").val();
-            serviceCost = serviceCost.replace(/\s*/g, '');
-            var serviceIP = "../Service/EditService?id=" + serviceID + "&name=" + serviceName + "&cost=" + serviceCost + "&page=" + page_key;
-            serviceIP = serviceIP.replace(/\s*/g, '');
-            $('#services').load(serviceIP);
+            var clientID = key;
+            var firstName = $('#ClientFirstNameEdit').val();
+            var secondName = $('#ClientSecondNameEdit').val();
+            var dateOfBorn = $('#ClientDateEdit').val();
+            var clientSerial = $('#ClientSerialEdit').val();
+            var currentPage = page_key;
+            var clientIP = "../Client/EditClient?id=" + clientID + "&firstName=" + firstName + "&secondName=" + secondName + "&serial=" + clientSerial + "&sex=" + sex + "&dateOfBorn=" + dateOfBorn + "&page=" + currentPage;
+            clientIP = clientIP.replace(/\s*/g, '');
+            $('#clients').load(clientIP);
         }
 
         function Delete() {
@@ -275,6 +315,14 @@
             document.getElementById('validate_createDate').hidden = true;
             document.getElementById('validate_createSex').hidden = true;
             document.getElementById('validate_createSerial').hidden = true;
+        }
+
+        function EditHide() {
+            document.getElementById('validate_editFirstName').hidden = true;
+            document.getElementById('validate_editSecondName').hidden = true;
+            document.getElementById('validate_editDate').hidden = true;
+            document.getElementById('validate_editSex').hidden = true;
+            document.getElementById('validate_editSerial').hidden = true;
         }
 
         function GetPage() {

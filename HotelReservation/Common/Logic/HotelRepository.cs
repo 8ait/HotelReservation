@@ -91,6 +91,12 @@ namespace HotelReservation.Common.Logic
             db.SaveChanges();
         }
 
+        public void EditClient(Client client)
+        {
+            db.Entry(client).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
         public void DeleteService(int id)
         {
             Service service = db.Services.Find(id);
