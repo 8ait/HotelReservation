@@ -61,5 +61,13 @@ namespace HotelReservation.Controllers
             _data.EditClient(id, firstName, secondName, serial, sex, dateOfBorn);
             return RedirectToAction("LoadPage", new { page = page });
         }
+
+        [HttpGet]
+        public ActionResult SearchClient(long serial)
+        {
+            ViewData["Clients"] = _data.GetSearchClient(serial);
+            ViewData["Serial"] = serial;
+            return PartialView();
+        }
     }
 }

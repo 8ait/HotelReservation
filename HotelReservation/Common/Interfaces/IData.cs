@@ -19,6 +19,7 @@ namespace HotelReservation.Common.Interfaces
         List<Client> GetClientsOnPage(int currentPage, int itemsOnPage);
         List<Service> ContainsService(string name);
         List<Service> GetSearchService(string name);
+        List<Client> GetSearchClient(long serial);
         void EditDay(Day day);
         void EditClient(int id, string firstName, string secondName, long serial, int sex, string dateOfBorn);
         void EditService(int id, string name, int cost);

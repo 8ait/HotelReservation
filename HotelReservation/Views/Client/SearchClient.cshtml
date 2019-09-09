@@ -1,0 +1,96 @@
+﻿@using HotelReservation.Models;
+@{
+    Layout = null;
+}
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="text-center">
+        <h5>Результаты поиска по номеру &#128373; <strong>@ViewData["Serial"]</strong></h5>
+        <br />
+    </div>
+    <table class="table table-striped table-responsive-sm table-responsive-xl table-bordered table-responsive-md">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <div class="text-center">
+                        <h6>Фамилия</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Имя</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Пол</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Дата рождения</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Client item in (List<Client>)ViewData["Clients"])
+            {
+                <tr>
+                    <td class="table-info">
+                        <div class="text-center">
+                            <strong>@item.SecondName</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.FirstName</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            @if (item.Sex)
+                            {
+                                <strong>&#129333;</strong>
+                            }
+                            else
+                            {
+                                <strong>&#129335;</strong>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.DateOfBorn.ToString("dd/MM/yyyy")</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-block">
+                            <button class="btn btn-info" value="@item.FirstName |@item.SecondName |@item.DateOfBorn.AddMinutes(1).ToString("yyyy-MM-dd") |@Convert.ToInt32(item.Sex) |@item.SerialOfPassport" id="@item.ClientID" onclick="EditModal(@item.ClientID, @ViewData["CurrentPage"])">
+                                &#9999;
+                            </button>
+                            <button class="btn btn-danger" value="@item.FirstName |@item.SecondName |@item.SerialOfPassport" id="@item.ClientID" onclick="DeleteModal(@item.ClientID, @ViewData["CurrentPage"])">
+                                &#128465;
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (((List<Client>)ViewData["Clients"]).Count == 0)
+    {
+        <br />
+        <div class="text-center">
+            <h5>Клиентов с таким номером не найдено &#128586;</h5>
+        </div>
+    }
+</body>
+

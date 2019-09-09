@@ -171,6 +171,20 @@ namespace HotelReservation.Common.Logic
             return searchService;
         }
 
+        public List<Client> GetSearchClient(long serial)
+        {
+            List<Client> client = new List<Client>();
+            List<Client> clients = _repository.GetClients().ToList();
+            foreach(Client item in clients)
+            {
+                if (item.SerialOfPassport == serial)
+                {
+                    client.Add(item);
+                }
+            }
+            return client;
+        }
+
         public void CreateService(string name, int cost)
         {
             Service service = new Service();

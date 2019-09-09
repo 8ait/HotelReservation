@@ -234,6 +234,7 @@
     <Content Include="Views\Room\GetRooms.cshtml" />
     <Content Include="Views\Client\ClienOptions.cshtml" />
     <Content Include="Views\Client\LoadPage.cshtml" />
+    <Content Include="Views\Client\SearchClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

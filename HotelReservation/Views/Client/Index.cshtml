@@ -36,7 +36,7 @@
                     </div>
                     <br />
                     <div class="text-center">
-                        <input type="text" class="form-control" id="serial" placeholder="Паспортные данные">
+                        <input type="text" class="form-control" id="serialSearch" placeholder="Паспортные данные">
                         <span class="badge badge-danger" id="validate_search">Неверный формат</span>
                     </div>
                     <br />
@@ -160,9 +160,29 @@
         </div>
     </div>
     <script>
-        window.onload = UpdateClients();
+        window.onload = GetStartView();
 
         var sex = -1;
+
+        function GetStartView() {
+            UpdateClients();
+            $("#serialSearch").val(null);
+            document.getElementById('validate_search').hidden = true;
+        }
+
+        function ValidateSearch() {
+            var serial = $("#serialSearch").val();
+            var flag1 = true;
+            if (serial.replace(/\s*/g, '').length != 10 || (!/^[0-9]+$/.test(serial))) {
+                flag1 = false;
+                document.getElementById('validate_search').hidden = false;
+            }
+            if (flag1) {
+                var ClientIP = "../Client/SearchClient?serial=" + serial;
+                ClientIP = ClientIP.replace(/\s*/g, '');
+                $('#clients').load(ClientIP);
+            }
+        }
 
         function Male() {
             sex = 1;
