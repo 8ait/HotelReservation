@@ -1,7 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Брони";
 }
-
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.maskedinput.min.js"></script>
 <body>
     <div class="container">
         <div class="alert alert-info">
@@ -22,12 +26,13 @@
                     <div class="text-center">
                         <div class="btn-group btn-block btn-group-lg justify-content-center">
 
-                            <button type="button" class="btn btn-outline-info navbar-btn" onclick="">В ожидании</button>
-                            <button type="button" class="btn btn-outline-success navbar-btn active" onclick="">Активные</button>
-                            <button type="button" class="btn btn-outline-danger navbar-btn" onclick="">Отмененные</button>
+                            <button type="button" id="ready" class="btn btn-outline-info navbar-btn" onclick="ReadyReservation()">В ожидании</button>
+                            <button type="button" id="active" class="btn btn-outline-success navbar-btn active" onclick="ActiveReservation()">Активные</button>
+                            <button type="button" id="cancel" class="btn btn-outline-danger navbar-btn" onclick="CancelReservation()">Неактивные</button>
 
                         </div>
                     </div>
+                    <br />
                     <div id="reservations">
 
                     </div>
@@ -42,4 +47,33 @@
             </div>
         </div>
     </div>
+    <script>
+        window.onload = GetStartView(0);
+
+        function GetStartView(mode) {
+            var ReservationIP = "../Reservation/LoadPage?page=1&mode=" + mode;
+            $('#reservations').load(ReservationIP);
+        }
+        function ActiveReservation() {
+            document.getElementById('active').className = "btn btn-outline-success navbar-btn active";
+            document.getElementById('cancel').className = "btn btn-outline-danger navbar-btn";
+            document.getElementById('ready').className = "btn btn-outline-info navbar-btn";
+            mode = 0;
+            GetStartView(mode);
+        }
+        function CancelReservation() {
+            document.getElementById('active').className = "btn btn-outline-success navbar-btn";
+            document.getElementById('cancel').className = "btn btn-outline-danger navbar-btn active";
+            document.getElementById('ready').className = "btn btn-outline-info navbar-btn";
+            mode = 2;
+            GetStartView(mode);
+        }
+        function ReadyReservation() {
+            document.getElementById('active').className = "btn btn-outline-success navbar-btn";
+            document.getElementById('cancel').className = "btn btn-outline-danger navbar-btn";
+            document.getElementById('ready').className = "btn btn-outline-info navbar-btn active";
+            mode = 1;
+            GetStartView(mode);
+        }
+    </script>
 </body>

@@ -235,6 +235,7 @@
     <Content Include="Views\Client\ClienOptions.cshtml" />
     <Content Include="Views\Client\LoadPage.cshtml" />
     <Content Include="Views\Client\SearchClient.cshtml" />
+    <Content Include="Views\Reservation\LoadPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

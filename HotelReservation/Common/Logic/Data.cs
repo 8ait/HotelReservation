@@ -238,5 +238,37 @@ namespace HotelReservation.Common.Logic
         {
             _repository.EditDuration(duration);
         }
+
+        public List<Reservation> GetReservation(int currentPage, int itemsOnPage, DateTime date, int mode)
+        {
+            List<Reservation> reservation = new List<Reservation>();
+            List<Reservation> reservations = _repository.GetReservations().ToList();
+            foreach (Reservation item in reservations)
+            {
+                switch (mode)
+                {
+                    case 0:
+                        if ((date.CompareTo(item.StartDate) >= 0) && (date.CompareTo(item.EndDate) <= 0))
+                        {
+                            reservation.Add(item);
+                        }
+                        break;
+                    case 1:
+                        if (date.CompareTo(item.StartDate) < 0)
+                        {
+                            reservation.Add(item);
+                        }
+                        break;
+                    case 2:
+                        if (date.CompareTo(item.EndDate) > 0)
+                        {
+                            reservation.Add(item);
+                        }
+                        break;
+                }
+            } 
+            return reservation;
+        }
+
     }
 }

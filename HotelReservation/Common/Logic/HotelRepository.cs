@@ -27,6 +27,11 @@ namespace HotelReservation.Common.Logic
             return db.Clients;
         }
 
+        public IEnumerable<Reservation> GetReservations()
+        {
+            return db.Reservations;
+        }
+
         public IEnumerable<Day> GetDays()
         {
             return db.Days;

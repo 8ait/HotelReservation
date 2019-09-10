@@ -1,0 +1,88 @@
+﻿@using HotelReservation.Models;
+@{
+    Layout = null;
+}
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <table class="table table-striped table-responsive-sm table-responsive-xl table-bordered table-responsive-md">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <div class="text-center">
+                        <h6>ID брони</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>ID клиента</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Дата заезда</h6>
+                    </div>
+                </th>
+                <th>
+                    <div class="text-center">
+                        <h6>Дата выезда</h6>
+                    </div>
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Reservation item in (List<Reservation>)ViewData["Reservations"])
+            {
+                <tr>
+                    <td class="table-info">
+                        <div class="text-center">
+                            <strong>@item.ReservationId</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.ClientId</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.StartDate.ToString("dd/MM/yyyy")</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <strong>@item.EndDate.ToString("dd/MM/yyyy")</strong>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-block">
+                            <button class="btn btn-info" onclick="">
+                                &#128220;
+                            </button>
+                            <button class="btn btn-danger"  onclick="">
+                                &#128465;
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <div class="text-center">
+        <strong>Страница</strong>
+        <input class="text-center" id="f1" type="number" min="1" max="@ViewData["Pages"]" style="width: 8%" value="@ViewData["CurrentPage"]" />
+        <strong>из @ViewData["Pages"]</strong>
+    </div>
+    <br />
+    <div class="text-center">
+        <button class="btn btn-warning" onclick="GetPage()"><strong>Перейти</strong>&#128640;</button>
+    </div>
+</body>
+
+
