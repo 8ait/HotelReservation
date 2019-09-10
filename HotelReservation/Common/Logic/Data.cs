@@ -242,6 +242,24 @@ namespace HotelReservation.Common.Logic
         public List<Reservation> GetReservation(int currentPage, int itemsOnPage, DateTime date, int mode)
         {
             List<Reservation> reservation = new List<Reservation>();
+            List<Reservation> reservations = GetListOfReservations(mode, date);
+            currentPage = GetValidatePageReservation(currentPage, itemsOnPage, mode, date);
+            int start = currentPage * itemsOnPage - (itemsOnPage - 1);
+            int end = currentPage * itemsOnPage;
+            if (end > reservations.Count)
+            {
+                end = reservations.Count;
+            }
+            for (int i = start - 1; i < end; i++)
+            {
+                reservation.Add(reservations[i]);
+            }
+            return reservation;
+        }
+
+        private List<Reservation> GetListOfReservations(int mode, DateTime date)
+        {
+            List<Reservation> reservation = new List<Reservation>();
             List<Reservation> reservations = _repository.GetReservations().ToList();
             foreach (Reservation item in reservations)
             {
@@ -266,8 +284,39 @@ namespace HotelReservation.Common.Logic
                         }
                         break;
                 }
-            } 
+            }
             return reservation;
+        }
+
+        public int GetCountOfPagesReservation(int itemsOnPage, int mode, DateTime date)
+        {
+            if (GetListOfReservations(mode, date).Count() % itemsOnPage == 0)
+            {
+                if (GetListOfReservations(mode, date).Count() == 0)
+                {
+                    return 1;
+                } else
+                {
+                    return GetListOfReservations(mode, date).Count() / itemsOnPage;
+                }
+            }
+            else
+            {
+                return GetListOfReservations(mode, date).Count() / itemsOnPage + 1;
+            }
+        }
+
+        public int GetValidatePageReservation(int page,int itemsOnPage, int mode, DateTime date)
+        {
+            if (page > GetCountOfPagesReservation(itemsOnPage, mode, date))
+            {
+                page = GetCountOfPagesReservation(itemsOnPage, mode, date);
+            }
+            else if (page <= 0)
+            {
+                page = 1;
+            }
+            return page;
         }
 
     }

@@ -49,6 +49,7 @@
     </div>
     <script>
         window.onload = GetStartView(0);
+        var mode;
 
         function GetStartView(mode) {
             var ReservationIP = "../Reservation/LoadPage?page=1&mode=" + mode;
@@ -74,6 +75,10 @@
             document.getElementById('ready').className = "btn btn-outline-info navbar-btn active";
             mode = 1;
             GetStartView(mode);
+        }
+        function LoadPage() {
+            var page = $('#f1').val();
+            $('#reservations').load("../Reservation/LoadPage?page=" + name + "&mode=" + mode);
         }
     </script>
 </body>

@@ -34,5 +34,7 @@ namespace HotelReservation.Common.Interfaces
         int GetValidatePage(int page, int itemsOnPage);
         int GetValidatePageClient(int page, int itemsOnPage);
         int GetCountOfPagesClient(int itemsOnPage);
+        int GetValidatePageReservation(int page, int itemsOnPage, int mode, DateTime date);
+        int GetCountOfPagesReservation(int itemsOnPage, int mode, DateTime date);
     }
 }

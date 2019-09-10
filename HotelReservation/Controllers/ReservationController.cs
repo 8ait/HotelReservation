@@ -25,7 +25,8 @@ namespace HotelReservation.Controllers
         public ActionResult LoadPage(int page = 1, int mode = 0)
         {
             ViewData["Reservations"] = _data.GetReservation(page, _itemsOnPage, DateTime.Today, mode);
-
+            ViewData["CurrentPage"] = _data.GetValidatePageReservation(page, _itemsOnPage, mode, DateTime.Today);
+            ViewData["Pages"] = _data.GetCountOfPagesReservation(_itemsOnPage, mode, DateTime.Today);
             return PartialView();
         }
        
