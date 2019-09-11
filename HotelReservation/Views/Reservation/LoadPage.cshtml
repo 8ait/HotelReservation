@@ -73,6 +73,15 @@
             }
         </tbody>
     </table>
+    @if (((List<Reservation>)ViewData["Reservations"]).Count == 0)
+    {
+        <br />
+        <div class="text-center">
+            <strong>Список пуст &#128586;</strong>
+        </div>
+    }
+    else
+    {
     <br />
     <div class="text-center">
         <strong>Страница</strong>
@@ -83,6 +92,7 @@
     <div class="text-center">
         <button class="btn btn-warning" onclick="GetPage()"><strong>Перейти</strong>&#128640;</button>
     </div>
+    }
 </body>
 
 

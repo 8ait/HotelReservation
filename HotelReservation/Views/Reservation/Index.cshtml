@@ -37,7 +37,7 @@
                             <div class="jumbotron" style="background-color: #5AEAA8">
                                 <br />
                                 <div class="text-center">
-                                    <button class="btn btn-success btn-lg">Забронировать номер &#128682;</button>
+                                    <button class="btn btn-success btn-lg" onclick="CreateModal()">Забронировать номер &#128682;</button>
                                 </div>
                             </div>
                         </div>
@@ -66,10 +66,22 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="CreateModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                        <h5><strong>Забронировать &#9989;</strong></h5>
+                </div>
+                <div id="forms">
+
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         window.onload = GetStartView(0);
         var mode;
-
+        var step;
         function GetStartView(mode) {
             var ReservationIP = "../Reservation/LoadPage?page=1&mode=" + mode;
             $('#reservations').load(ReservationIP);
@@ -98,6 +110,13 @@
         function LoadPage() {
             var page = $('#f1').val();
             $('#reservations').load("../Reservation/LoadPage?page=" + name + "&mode=" + mode);
+        }
+        
+        function CreateModal() {
+            step = 0
+            $('#edit').text("Далее");
+            $('#forms').load("../Reservation/Forms?mode=" + step);
+            $('#CreateModal').modal('show');
         }
     </script>
 </body>

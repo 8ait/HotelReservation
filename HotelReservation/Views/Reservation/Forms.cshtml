@@ -1,0 +1,49 @@
+﻿@using HotelReservation.Models;
+@{
+    Layout = null;
+}
+<head>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="text-center">
+        <div class="modal-body text-center">
+            @if (Convert.ToInt32(ViewData["mode"]) == 0)
+            {
+                <strong>Дата заезда</strong>
+                <input type="date" class="form-control" id="ClientDate">
+                <div class="text-center">
+                    <span class="badge badge-danger" id="validate_startDate">Данное поле не может быть пустым</span>
+                </div>
+                <strong>Дата выезда</strong>
+                <input type="date" class="form-control" id="ClientDate">
+                <div class="text-center">
+                    <span class="badge badge-danger" id="validate_endDate">Данное поле не может быть пустым</span>
+                </div>
+            }
+            else if (Convert.ToInt32(ViewData["mode"]) == 1)
+            {
+                if (((List<Room>)ViewData["rooms"]).Count == 0)
+                {
+                    <strong>Нет</strong>
+                }
+                else
+                {
+                    foreach (Room item in (List<Room>)ViewData["rooms"])
+                    {
+                        <button class="list-group-item list-group-item-success list-group-item-action d-flex justify-content-between align-items-center">
+                            <strong>@item.RoomId</strong>
+                        </button>
+                    }
+                }
+            }
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" id="edit" onclick="Set()"> Далее</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="CreateClear()">Отмена</button>
+        </div>
+</div>
+    <script>
+    </script>
+</body>

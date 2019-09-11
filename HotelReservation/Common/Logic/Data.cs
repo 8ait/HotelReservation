@@ -319,5 +319,40 @@ namespace HotelReservation.Common.Logic
             return page;
         }
 
+        public List<Room> GetRoomsForReservation(DateTime startDate, DateTime endDate)
+        {
+            List<Room> room = new List<Room>();
+            List<Room> rooms = _repository.GetRooms().ToList();
+            bool[] errorRooms = new bool[10];
+            List<Reservation> reservation = _repository.GetReservations().ToList();
+
+            for (int i = 0; i < 10; i++)
+            {
+                errorRooms[i] = true;
+            }
+
+            foreach (Reservation item in reservation)
+            {
+                if (startDate.CompareTo(item.StartDate) >= 0 && startDate.CompareTo(item.EndDate) <= 0 || endDate.CompareTo(item.StartDate) >= 0 && endDate.CompareTo(item.EndDate) <= 0)
+                {
+                    errorRooms[item.RoomId] = false;
+                }
+                if (startDate.CompareTo(item.StartDate) <= 0 && endDate.CompareTo(item.EndDate) >= 0)
+                {
+                    errorRooms[item.RoomId] = false;
+                }
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (errorRooms[i])
+                {
+                    room.Add(rooms[i]);
+                }
+            }
+
+            return room;
+        }
+
     }
 }
