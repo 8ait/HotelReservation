@@ -30,20 +30,13 @@ namespace HotelReservation.Controllers
             return PartialView();
         }
 
-        public ActionResult Forms(int mode = 0, string startDate = null, string endDate = null)
+        public ActionResult Forms(string startDate = null, string endDate = null)
         {
-            if (mode == 0)
-            {
-                ViewData["mode"] = 0;
-            }
-            if (mode == 1)
-            {
-                ViewData["mode"] = 1;
                 DateTime start = DateTime.Parse(startDate);
                 DateTime end = DateTime.Parse(endDate);
                 ViewData["rooms"] = _data.GetRoomsForReservation(start, end);
-            }
-            return PartialView();
+          
+                return PartialView();
         }
 
         public ActionResult GetRooms(string startDate, string endDate)

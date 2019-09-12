@@ -72,8 +72,27 @@
                 <div class="modal-header text-center">
                         <h5><strong>Забронировать &#9989;</strong></h5>
                 </div>
-                <div id="forms">
+                <div class="text-center">
+                    <div class="modal-body text-center">
+                        <strong>Дата заезда</strong>
+                        <input type="date" class="form-control" id="ClientStartDate">
+                        <div class="text-center">
+                            <span class="badge badge-danger" id="validate_startDate">Данное поле не может быть пустым</span>
+                        </div>
+                        <strong>Дата выезда</strong>
+                        <input type="date" class="form-control" id="ClientEndDate">
+                        <div class="text-center">
+                            <span class="badge badge-danger" id="validate_endDate">Данное поле не может быть пустым</span>
+                        </div>
+                        <br />
+                        <div id="rooms">
 
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" id="edit" onclick="loadForms()"> Далее</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="CreateClear()">Отмена</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,8 +134,13 @@
         function CreateModal() {
             step = 0
             $('#edit').text("Далее");
-            $('#forms').load("../Reservation/Forms?mode=" + step);
             $('#CreateModal').modal('show');
+        }
+
+        function loadForms() {
+            var start = $('#ClientStartDate').val();
+            var end = $('#ClientEndDate').val();
+            $('#rooms').load("../Reservation/Forms?&startDate=" + start + "&endDate=" + end);
         }
     </script>
 </body>
